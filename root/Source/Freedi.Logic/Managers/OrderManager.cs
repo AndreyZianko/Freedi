@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Freedi.DataProvider.Interfaces;
 using Freedi.DataProvider.Models;
+using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,17 @@ using System.Threading.Tasks;
 
 namespace Freedi.Logic.Managers
 {
-    public class OrderManager
+    public class OrderManager : IOrderManager
     {
         IUnitOfWork Database { get; set; }
 
         public OrderManager(IUnitOfWork uow)
         {
             Database = uow;
+        }
+        public OrderManager()
+        {
+
         }
         public void MakeOrder(OrderView orderView)
         {
@@ -34,19 +39,6 @@ namespace Freedi.Logic.Managers
             Database.Save();
         }
 
-        public GoodView GetGood(int? id)
-        {
-            if (id != null)
-            { 
-            var good = Database.Goods.Get(id.Value);
-            return new GoodView { Id = good.Id, Name = good.Name, Price = good.Price };
-            }
-            else
-            {
-                return null;
-            }
-
-        }
         public IEnumerable<GoodView> GetGoods()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Good, GoodView>()).CreateMapper();
@@ -56,6 +48,18 @@ namespace Freedi.Logic.Managers
         public void Dispose()
         {
             Database.Dispose();
+        }
+
+        public GoodView GetGood(int? id)
+        {
+            if (id != null)
+            {
+                var good = Database.Goods.Get(id.Value);
+                return new GoodView { Id = good.Id, Name = good.Name, Price = good.Price };
+            }
+            else
+                return null;
+           
         }
     }
 }

@@ -9,14 +9,20 @@ namespace Freedi.Website.Controllers
 {
     public class HomeController : Controller
     {
-        IOrderManager orderManage;
-        public HomeController(IOrderManager order)
+        IOrderManager orderManager;
+        public HomeController(IOrderManager order) : base()
         {
-            orderManage = order;
+            orderManager = order;
         }
+        public HomeController()
+        {
+            
+        }
+
+
         public ActionResult Index()
         {
-            var k = orderManage.GetGoods();
+            var k = orderManager.GetGood(1);
             return View();
         }
 

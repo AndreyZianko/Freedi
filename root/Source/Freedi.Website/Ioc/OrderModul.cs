@@ -16,6 +16,7 @@ namespace Freedi.Website.Ioc
             builder.RegisterType<OrderManager>()
                    .As<IOrderManager>().InstancePerRequest();
 
+
         }
     }
 }

@@ -10,13 +10,18 @@ namespace Freedi.DataProvider.Repositories
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private FreediContext db;
+        public FreediContext db;
         private GoodRepository goodRepository;
         private OrderRepository orderRepository;
 
-        public EFUnitOfWork(string connectionString)
+        public EFUnitOfWork(string connectionString) : base()
         {
             db = new FreediContext(connectionString);
+        } 
+
+        public EFUnitOfWork()
+        {
+            
         }
         public IRepository<Good> Goods
         {

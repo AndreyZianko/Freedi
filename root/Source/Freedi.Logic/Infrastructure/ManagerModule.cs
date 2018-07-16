@@ -18,9 +18,11 @@ namespace Freedi.Logic.Infrastructure
         }
         protected override void Load(ContainerBuilder builder)
         {
+            
             builder.RegisterType<EFUnitOfWork>()
-                   .As<IUnitOfWork>().WithParameter("connection", connectionString);
-                   
+       .As<IUnitOfWork>()
+       .WithParameter("connection", new EFUnitOfWork(connectionString)).InstancePerRequest();
+
         }
 
       
