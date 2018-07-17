@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Freedi.Logic.loc;
 using Freedi.Website.Ioc;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ namespace Freedi.Website
     {
         protected void Application_Start()
         {
-
             AutofacConfig.ConfigureContainer();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

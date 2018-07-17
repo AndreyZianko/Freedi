@@ -19,10 +19,7 @@ namespace Freedi.Logic.Managers
         {
             Database = uow;
         }
-        public OrderManager()
-        {
-
-        }
+ 
         public void MakeOrder(OrderView orderView)
         {
             Good good = Database.Goods.Get(orderView.GoodId);
@@ -54,7 +51,7 @@ namespace Freedi.Logic.Managers
         {
             if (id != null)
             {
-                var good = Database.Goods.Get(id.Value);
+                var good = Database.Goods.Get(id);
                 return new GoodView { Id = good.Id, Name = good.Name, Price = good.Price };
             }
             else

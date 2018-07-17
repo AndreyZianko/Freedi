@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Freedi.DataProvider.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+   public interface IOrderRepository : IRepository<Order>
     {
-     
-        IGoodRepository Goods{ get; }
-        IOrderRepository Orders{ get; }
-        void Save();
+        
     }
 }

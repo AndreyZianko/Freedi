@@ -11,17 +11,11 @@ namespace Freedi.Logic.Infrastructure
 {
     public class ManagerModule : Module
     {
-        private string connectionString;
-        public ManagerModule(string connection)
-        {
-            connectionString = connection;
-        }
+      
         protected override void Load(ContainerBuilder builder)
         {
             
-            builder.RegisterType<EFUnitOfWork>()
-       .As<IUnitOfWork>()
-       .WithParameter("connection", new EFUnitOfWork(connectionString)).InstancePerRequest();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
         }
 
