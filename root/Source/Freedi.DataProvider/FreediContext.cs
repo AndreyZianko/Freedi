@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 namespace Freedi.DataProvider
 {
-    public class FreediContext : DbContext, IFreediContext
+    public class FreediContext : DbContext
     {
        
         public DbSet<Good> Goods { get; set; }
