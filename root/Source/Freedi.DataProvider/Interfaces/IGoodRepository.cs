@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Freedi.DataProvider.Interfaces
 {
-   public interface IGoodRepository : IRepository<Good>
+   public interface IGoodRepository : IRepository<Goods>
     {
  
     }

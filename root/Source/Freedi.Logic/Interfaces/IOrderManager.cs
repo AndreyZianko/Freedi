@@ -12,6 +12,5 @@ namespace Freedi.Logic.Interfaces
         void MakeOrder(OrderView orderView);
         GoodView GetGood(int? id);
         IEnumerable<GoodView> GetGoods();
-        void Dispose();
     }
 }
