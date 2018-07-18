@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FreediContext.cs" />
-    <Compile Include="IFreediContext.cs" />
     <Compile Include="Infrastructure\DataProviderModule.cs" />
     <Compile Include="Interfaces\IGoodRepository.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />

@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Infrastructure\ManagerModule.cs" />
     <Compile Include="Interfaces\IGoodManager.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
