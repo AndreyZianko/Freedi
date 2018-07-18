@@ -5,53 +5,45 @@ using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Freedi.Logic.Managers
 {
     public class OrderManager : IOrderManager
     {
-        IUnitOfWork Database { get; set; }
+        IUnitOfWork _uow { get; set; }
 
         public OrderManager(IUnitOfWork uow)
         {
-            Database = uow;
+            _uow = uow;
         }
  
         public void MakeOrder(OrderView orderView)
         {
-            Good good = Database.Goods.Get(orderView.GoodId);
+            var good = _uow.Goods.Get(orderView.GoodId);
 
 
-            Order order = new Order
+            var order = new Order
             {
                 Date = DateTime.Now,
                 Address = orderView.Address,
                 GoodId = good.Id,
                 PhoneNumber = orderView.PhoneNumber
             };
-            Database.Orders.Create(order);
-            Database.Save();
+            _uow.Orders.Create(order);
+            _uow.Save();
         }
 
         public IEnumerable<GoodView> GetGoods()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Good, GoodView>()).CreateMapper();
-            return mapper.Map<IEnumerable<Good>, List<GoodView>>(Database.Goods.GetAll());
-        }
-
-        public void Dispose()
-        {
-            Database.Dispose();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Goods, GoodView>()).CreateMapper();
+            return mapper.Map<IEnumerable<Goods>, List<GoodView>>(_uow.Goods.GetAll());
         }
 
         public GoodView GetGood(int? id)
         {
             if (id != null)
             {
-                var good = Database.Goods.Get(id);
+                var good = _uow.Goods.Get(id);
                 return new GoodView { Id = good.Id, Name = good.Name, Price = good.Price };
             }
             else

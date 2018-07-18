@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Freedi.DataProvider.Models
 {
     [Table("Goods")]
-    public class Good
+    public class Goods
     {
         public int Id { get; set; }
         public string Name { get; set; }

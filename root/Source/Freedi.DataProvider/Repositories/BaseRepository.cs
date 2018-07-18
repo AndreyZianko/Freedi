@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace Freedi.DataProvider.Repositories
 {
-    public class BaseRepository<T>  : IRepository<T> where T : class
+    public class BaseRepository<T> : IRepository<T> where T : class
     {
         FreediContext _context;
         protected readonly DbSet<T> _dbset;
+
         public BaseRepository(FreediContext context)
         {
             _context = context;
             _dbset = context.Set<T>();
         }
+
         public void Create(T item)
         {
             _dbset.Add(item);
@@ -46,8 +48,6 @@ namespace Freedi.DataProvider.Repositories
             return _dbset.ToList();
         }
 
-    
-
         public void Update(T item)
         {
             _context.Entry(item).State = EntityState.Modified;
@@ -59,6 +59,6 @@ namespace Freedi.DataProvider.Repositories
             return resault;
         }
 
-       
+
     }
 }
