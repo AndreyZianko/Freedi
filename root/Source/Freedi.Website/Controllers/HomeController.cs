@@ -18,8 +18,7 @@ namespace Freedi.Website.Controllers
         {
             
         }
-
-
+       
         public ActionResult Index()
         {
             
