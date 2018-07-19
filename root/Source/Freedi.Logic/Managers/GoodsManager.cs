@@ -1,4 +1,6 @@
-﻿using Freedi.Logic.Interfaces;
+﻿using Freedi.DataProvider.Interfaces;
+using Freedi.Logic.Interfaces;
+using Freedi.Model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,41 @@ using System.Threading.Tasks;
 
 namespace Freedi.Logic.Managers
 {
-    public class GoodsManager : IGoodManager
+    public class GoodsManager : IGoodsManager
     {
-        public List<GoodsManager> GetGoods()
+        IUnitOfWork _uow { get; set; }
+       public GoodsManager(IUnitOfWork uow)
         {
-            throw new NotImplementedException();
+            _uow = uow;
+
+        }
+        public List<GoodsView> GetGoods()
+        {
+            var allgoods = _uow.Goods.GetAll();
+            var result = new List<GoodsView>();
+            foreach (var goods in allgoods)
+            {
+                if(goods.Stock)
+                {
+                        result.Add(new GoodsView
+                        {
+                            Id = goods.Id,
+                            Name = goods.Name,
+                            Price = goods.Price,
+                            Currency =goods.Currency,
+                            Sex = goods.Sex,
+                            Photo = goods.Photo,
+                            StockQuantity = goods.StockQuantity,
+                            SKU = goods.SKU,
+                            Description = goods.Description,
+                            Type = goods.Type,
+                            Unit = goods.Unit
+                        });
+                   
+                }
+               
+            }
+            return result;
         }
     }
 }

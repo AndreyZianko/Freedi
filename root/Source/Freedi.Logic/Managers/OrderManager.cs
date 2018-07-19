@@ -33,18 +33,18 @@ namespace Freedi.Logic.Managers
             _uow.Save();
         }
 
-        public IEnumerable<GoodView> GetGoods()
+        public IEnumerable<GoodsView> GetGoods()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Goods, GoodView>()).CreateMapper();
-            return mapper.Map<IEnumerable<Goods>, List<GoodView>>(_uow.Goods.GetAll());
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Goods, GoodsView>()).CreateMapper();
+            return mapper.Map<IEnumerable<Goods>, List<GoodsView>>(_uow.Goods.GetAll());
         }
 
-        public GoodView GetGood(int? id)
+        public GoodsView GetGood(int? id)
         {
             if (id != null)
             {
                 var good = _uow.Goods.Get(id);
-                return new GoodView { Id = good.Id, Name = good.Name, Price = good.Price };
+                return new GoodsView { Id = good.Id, Name = good.Name, Price = good.Price };
             }
             else
                 return null;

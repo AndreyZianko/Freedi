@@ -10,9 +10,11 @@ namespace Freedi.Website.Controllers
     public class HomeController : Controller
     {
         IOrderManager _orderManager;
-        public HomeController(IOrderManager orderManager) 
+        IGoodsManager _goodsManager;
+        public HomeController(IOrderManager orderManager,IGoodsManager goodsManager) 
         {
             _orderManager = orderManager;
+            _goodsManager = goodsManager;
         }
         public HomeController()
         {
@@ -22,7 +24,7 @@ namespace Freedi.Website.Controllers
         public ActionResult Index()
         {
             
-            var k = _orderManager.GetGood(1);
+            
             return View();
         }
 
@@ -41,9 +43,9 @@ namespace Freedi.Website.Controllers
         }
         public ActionResult Catalog()
         {
-          
 
-            return View();
+            
+            return View(_goodsManager.GetGoods());
         }
     }
 }

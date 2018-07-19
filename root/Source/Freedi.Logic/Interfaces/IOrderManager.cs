@@ -10,7 +10,7 @@ namespace Freedi.Logic.Interfaces
    public interface IOrderManager
     {
         void MakeOrder(OrderView orderView);
-        GoodView GetGood(int? id);
-        IEnumerable<GoodView> GetGoods();
+        GoodsView GetGood(int? id);
+        IEnumerable<GoodsView> GetGoods();
     }
 }

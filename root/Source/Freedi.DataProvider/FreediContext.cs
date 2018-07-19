@@ -9,20 +9,21 @@ namespace Freedi.DataProvider
         public DbSet<Order> Orders { get; set; }
         static FreediContext()
         {
+            Database.SetInitializer<FreediContext>(new CreateDatabaseIfNotExists<FreediContext>());
 
-            Database.SetInitializer<FreediContext>(new StoreDbInitializer());
         }
         public FreediContext()
-            : base("name = DefaultConnection")
+            : base("name = FreediConnection")
         {
+
         }
     }
 
-    public class StoreDbInitializer : DropCreateDatabaseIfModelChanges<FreediContext>
+    public class StoreDbInitializer : CreateDatabaseIfNotExists<FreediContext>
     {
         protected override void Seed(FreediContext db)
         {
-            db.Goods.Add(new Goods { Id = 1, Name = "black Bag", Type = "Bag", Price = 220, Description = "d", Photo = "ph", SKU = "p", Stock = true, StockQuantity = 11, Unit = "count" });
+            db.Goods.Add(new Goods { Name = "Leather Bag", Sex = "Women", Type = "Bag", Price = 220, Currency = "USD", Description = "Very beautiful bag", Photo = "~Content\\TemplateImages\\product_4.png", SKU = "LB220", Stock = true, StockQuantity = 11, Unit = "pieces" });
             db.SaveChanges();
         }
     }

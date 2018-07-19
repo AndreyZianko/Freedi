@@ -8,13 +8,15 @@ using System.Web;
 
 namespace Freedi.Website.Ioc
 {
-    public class OrderModule : Module
+    public class LogicModules : Module
     {
       
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<OrderManager>()
                    .As<IOrderManager>().InstancePerRequest();
+            builder.RegisterType<GoodsManager>()
+                   .As<IGoodsManager>().InstancePerRequest();
 
 
         }

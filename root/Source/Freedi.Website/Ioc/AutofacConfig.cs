@@ -21,7 +21,7 @@ namespace Freedi.Website.Ioc
         {
             var builder = AutofacLogicConfig.ConfigureLogicContainer();
             builder.RegisterModule(new ManagerModule());
-            builder.RegisterModule(new OrderModule());
+            builder.RegisterModule(new LogicModules());
             builder.RegisterControllers(typeof(MvcApplication).Assembly)
              .InstancePerRequest();
             var container = builder.Build();

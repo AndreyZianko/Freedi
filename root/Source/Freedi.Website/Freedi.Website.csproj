@@ -207,7 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Ioc\AutofacConfig.cs" />
-    <Compile Include="Ioc\OrderModul.cs" />
+    <Compile Include="Ioc\LogicModules.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -333,7 +333,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Catalog.cshtml" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -370,6 +369,7 @@
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.eot" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.woff" />
+    <Content Include="Views\Home\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
