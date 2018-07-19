@@ -16,15 +16,10 @@ namespace Freedi.Website.Controllers
             _orderManager = orderManager;
             _goodsManager = goodsManager;
         }
-        public HomeController()
-        {
-            
-        }
+
        
         public ActionResult Index()
         {
-            
-            
             return View();
         }
 
@@ -43,8 +38,6 @@ namespace Freedi.Website.Controllers
         }
         public ActionResult Catalog()
         {
-
-            
             return View(_goodsManager.GetGoods());
         }
     }

@@ -1,11 +1,7 @@
 ﻿using Freedi.DataProvider.Interfaces;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Freedi.Logic.Managers
 {
@@ -20,6 +16,7 @@ namespace Freedi.Logic.Managers
         public List<GoodsView> GetGoods()
         {
             var allgoods = _uow.Goods.GetAll();
+
             var result = new List<GoodsView>();
             foreach (var goods in allgoods)
             {
@@ -39,7 +36,6 @@ namespace Freedi.Logic.Managers
                             Type = goods.Type,
                             Unit = goods.Unit
                         });
-                   
                 }
                
             }
