@@ -21,7 +21,6 @@ namespace Freedi.Logic.Managers
         {
             var good = _uow.Goods.Get(orderView.GoodId);
 
-
             var order = new Order
             {
                 Date = DateTime.Now,
@@ -35,12 +34,35 @@ namespace Freedi.Logic.Managers
 
         public IEnumerable<GoodsView> GetGoods()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Goods, GoodsView>()).CreateMapper();
-            return mapper.Map<IEnumerable<Goods>, List<GoodsView>>(_uow.Goods.GetAll());
+            var allgoods = _uow.Goods.GetAll();
+            var result = new List<GoodsView>();
+            foreach (var goods in allgoods)
+            {
+                result.Add(new GoodsView
+                {
+                    Id = goods.Id,
+                    Name = goods.Name,
+                    Price = goods.Price,
+                    Currency = goods.Currency,
+                    Sex = goods.Sex,
+                    Photo = goods.Photo,
+                    StockQuantity = goods.StockQuantity,
+                    SKU = goods.SKU,
+                    Description = goods.Description,
+                    Type = goods.Type,
+                    Unit = goods.Unit,
+                    Stock = goods.Stock
+
+                });
+
+
+            }
+            return result;
         }
 
         public GoodsView GetGood(int? id)
         {
+
             if (id != null)
             {
                 var good = _uow.Goods.Get(id);
