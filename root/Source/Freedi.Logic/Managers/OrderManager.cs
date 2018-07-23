@@ -15,12 +15,14 @@ namespace Freedi.Logic.Managers
         public OrderManager(IUnitOfWork uow)
         {
             _uow = uow;
+            
         }
  
         public void MakeOrder(OrderView orderView)
         {
             var good = _uow.Goods.Get(orderView.GoodId);
-
+           
+          
             var order = new Order
             {
                 Date = DateTime.Now,

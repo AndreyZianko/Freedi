@@ -1,12 +1,15 @@
-﻿using Freedi.DataProvider.Models;
+﻿using Freedi.DataProvider.Entites;
+using Freedi.DataProvider.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 namespace Freedi.DataProvider
 {
-    public class FreediContext : DbContext
+    public class FreediContext : IdentityDbContext<ApplicationUser>
     {
 
         public DbSet<Goods> Goods { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ClientProfile> ClientProfiles { get; set; }
         static FreediContext()
         {
 

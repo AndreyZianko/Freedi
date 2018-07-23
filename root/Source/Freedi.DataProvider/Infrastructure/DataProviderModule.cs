@@ -17,6 +17,8 @@ namespace Freedi.DataProvider.Infrastructure
             builder.RegisterType<FreediContext>().AsSelf().InstancePerRequest();
             builder.RegisterType<GoodRepository>().As<IGoodRepository>().InstancePerRequest();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerRequest();
+            builder.RegisterType<ClientRepository>().As<IClientRepository>().InstancePerRequest();
+            
         }
 
     }

@@ -11,6 +11,7 @@ namespace Freedi.DataProvider.Repositories
     public class BaseRepository<T> : IRepository<T> where T : class
     {
         FreediContext _context;
+        FreediContext _appContext;
         protected readonly DbSet<T> _dbset;
 
         public BaseRepository(FreediContext context)
