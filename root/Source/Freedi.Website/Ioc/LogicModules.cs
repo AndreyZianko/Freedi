@@ -1,10 +1,6 @@
 ﻿using Autofac;
 using Freedi.Logic.Interfaces;
 using Freedi.Logic.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Freedi.Website.Ioc
 {
@@ -17,7 +13,7 @@ namespace Freedi.Website.Ioc
                    .As<IOrderManager>().InstancePerRequest();
             builder.RegisterType<GoodsManager>()
                    .As<IGoodsManager>().InstancePerRequest();
-
+           
 
         }
     }

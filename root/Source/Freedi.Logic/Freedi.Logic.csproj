@@ -89,7 +89,6 @@
   <ItemGroup>
     <Compile Include="Infrastructure\ManagerModule.cs" />
     <Compile Include="Interfaces\IGoodManager.cs" />
-    <Compile Include="Interfaces\IManagerCreator.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
     <Compile Include="loc\AutofacLogicConfig.cs" />
