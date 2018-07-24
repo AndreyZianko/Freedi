@@ -32,11 +32,12 @@ namespace Freedi.Website.Controllers
             }
         }
 
+  
         public ActionResult Index()
         {
             return View();
         }
-        [Authorize]
+       
         public ActionResult Login()
         {
          
