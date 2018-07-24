@@ -7,7 +7,8 @@
 
 
 <div class="row">
-    <div class="col-md-8">
+      <div class="get_in_touch_contents">
+        <div class="col-lg-10 get_in_touch_col">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -51,14 +52,14 @@
                     </p>*@
             }
         </section>
-    </div>
+            </div>
     @*<div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>*@
-</div>
+        </div>
+    </div>
 
-@*<script src="~/Content/TemplateStyles/bootstrap4/bootstrap.min.js"></script>
-    <script src="~/Scripts/TemplateScripts/jquery-3.2.1.min.js"></script>*@
+
 
