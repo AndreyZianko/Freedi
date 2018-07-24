@@ -91,7 +91,6 @@
     <Compile Include="Interfaces\IGoodManager.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
-    <Compile Include="loc\AutofacLogicConfig.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\GoodsManager.cs" />
     <Compile Include="Managers\OrderManager.cs" />

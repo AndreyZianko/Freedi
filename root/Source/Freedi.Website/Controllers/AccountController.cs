@@ -99,7 +99,9 @@ namespace Freedi.Website.Controllers
                 };
                 OperationDetails operationDetails = await _um.Create(userDto);
                 if (operationDetails.Succedeed)
+                { 
                     return RedirectToAction("Index", "Home");
+                }
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
@@ -109,10 +111,10 @@ namespace Freedi.Website.Controllers
         {
             await _um.SetInitialData(new UserViewModel
             {
-                Email = "somemail@mail.ru",
-                UserName = "somemail@mail.ru",
-                Password = "ad46D_ewr3",
-                Name = "Семен Семенович Горбунков",
+                Email = "kxabog@mail.ru",
+                UserName = "kxabog@mail.ru",
+                Password = "kxabog123",
+                Name = "Андрей Андреевич Андреев",
                 Address = "ул. Спортивная, д.30, кв.75",
                 Role = "admin",
             }, new List<string> { "user", "admin" });
