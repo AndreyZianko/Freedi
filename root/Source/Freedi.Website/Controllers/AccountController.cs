@@ -21,6 +21,7 @@ namespace Freedi.Website.Controllers
         public AccountController(IUserManager um)
         {
             _um = um;
+            
           
         }
         private IAuthenticationManager AuthenticationManager
@@ -101,7 +102,7 @@ namespace Freedi.Website.Controllers
                 };
                 OperationDetails operationDetails = await _um.Create(userDto);
                 if (operationDetails.Succedeed)
-                    return View("SuccessRegister");
+                    return RedirectToAction("Index", "Home");
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
