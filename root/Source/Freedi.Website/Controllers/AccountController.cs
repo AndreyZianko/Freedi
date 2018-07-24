@@ -40,7 +40,9 @@ namespace Freedi.Website.Controllers
        
         public ActionResult Login()
         {
-         
+         if(User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
@@ -51,7 +53,7 @@ namespace Freedi.Website.Controllers
             //await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserView userDto = new UserView { Email = model.Email, Password = model.Password };
+                UserViewModel userDto = new UserViewModel { Email = model.Email, Password = model.Password };
                 ClaimsIdentity claim = await _um.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -89,7 +91,7 @@ namespace Freedi.Website.Controllers
             await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserView userDto = new UserView
+                UserViewModel userDto = new UserViewModel
                 {
                     Email = model.Email,
                     Password = model.Password,
@@ -107,7 +109,7 @@ namespace Freedi.Website.Controllers
         }
         private async Task SetInitialDataAsync()
         {
-            await _um.SetInitialData(new UserView
+            await _um.SetInitialData(new UserViewModel
             {
                 Email = "somemail@mail.ru",
                 UserName = "somemail@mail.ru",

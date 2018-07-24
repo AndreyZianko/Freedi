@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="~/Scripts/TemplatePlugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/Scripts/TemplatePlugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/Content/TemplateStyles/main_styles.css">
+    
 </head>
 <body>
     <div class="super_container">
@@ -61,9 +62,10 @@
                                             <i class="fa fa-angle-down"></i>
                                         </a>
                                         <ul class="account_selection">
-                                            @*identity*@
+                                            <li>@Html.RouteLink("Sign In", new { controller = "Account", action = "Login" }, new { @class = "link" })</li>
+                                            <li>@Html.RouteLink("Register", new { controller = "Account", action = "Register" }, new { @class = "link" })</li>
                                             @*<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                                <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>*@
+                                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>*@
                                         </ul>
                                     </li>
                                 </ul>

@@ -4,15 +4,12 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container contact_container" style="margin-top:160px">
+<div class="container" style="margin-top:160px">
     <div class="row">
         <div class="get_in_touch_contents">
             <div class="col-lg-10 get_in_touch_col">
-                <h1>Get In Touch With Us!</h1>
-                <p>Fill out the form below to recieve a free and confidential.</p>
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-
 
                     @Html.AntiForgeryToken()
                     <h4>Создайте новую учетную запись.</h4>

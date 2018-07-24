@@ -20,7 +20,7 @@ namespace Freedi.Logic.Managers
             _uow = uow;
         }
 
-        public async Task<OperationDetails> Create(UserView userDto)
+        public async Task<OperationDetails> Create(UserViewModel userDto)
         {
             ApplicationUser user = await _uow.Users.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
@@ -44,18 +44,16 @@ namespace Freedi.Logic.Managers
         }
 
 
-        public async Task<ClaimsIdentity> Authenticate(UserView userDto)
+        public async Task<ClaimsIdentity> Authenticate(UserViewModel userDto)
         {
             ClaimsIdentity claim = null;
-            // находим пользователя
             ApplicationUser user = await _uow.Users.UserManager.FindAsync(userDto.Email, userDto.Password);
-            // авторизуем его и возвращаем объект ClaimsIdentity
             if (user != null)
                 claim = await _uow.Users.UserManager.CreateIdentityAsync(user,DefaultAuthenticationTypes.ApplicationCookie);
             return claim;
         }
 
-        public async Task SetInitialData(UserView adminDto, List<string> roles)
+        public async Task SetInitialData(UserViewModel adminDto, List<string> roles)
         {
             foreach (string roleName in roles)
             {

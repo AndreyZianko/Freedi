@@ -18,7 +18,7 @@ namespace Freedi.Logic.Managers
             
         }
  
-        public void MakeOrder(OrderView orderView)
+        public void MakeOrder(OrderViewModel orderView)
         {
             var good = _uow.Goods.Get(orderView.GoodId);
            

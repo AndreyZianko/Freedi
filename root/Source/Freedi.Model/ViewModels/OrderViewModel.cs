@@ -2,7 +2,7 @@
 
 namespace Freedi.Model.ViewModels
 {
-    public class OrderView
+    public class OrderViewModel
     {
         public int Id { get; set; }
         public decimal Sum { get; set; }
