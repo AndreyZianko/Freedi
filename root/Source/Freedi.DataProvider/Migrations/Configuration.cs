@@ -1,5 +1,6 @@
 namespace Freedi.DataProvider.Migrations
 {
+    using Freedi.DataProvider.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -9,16 +10,13 @@ namespace Freedi.DataProvider.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "Freedi.DataProvider.FreediContext";
         }
 
         protected override void Seed(Freedi.DataProvider.FreediContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            
         }
     }
 }

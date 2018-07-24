@@ -5,7 +5,6 @@ namespace Freedi.DataProvider.Models
     [Table("Goods")]
     public class Goods
     {
-
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -18,8 +17,6 @@ namespace Freedi.DataProvider.Models
         public string Photo { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
-        
-
     }
 }
 

@@ -71,9 +71,9 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Entites\Goods.cs" />
     <Compile Include="Entites\Order.cs" />
-    <Compile Include="Migrations\201807201526512_MigrateDB.cs" />
-    <Compile Include="Migrations\201807201526512_MigrateDB.Designer.cs">
-      <DependentUpon>201807201526512_MigrateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201807241509443_Init.cs" />
+    <Compile Include="Migrations\201807241509443_Init.Designer.cs">
+      <DependentUpon>201807241509443_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,8 +88,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807201526512_MigrateDB.resx">
-      <DependentUpon>201807201526512_MigrateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807241509443_Init.resx">
+      <DependentUpon>201807241509443_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

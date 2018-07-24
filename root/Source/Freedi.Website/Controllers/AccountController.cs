@@ -50,7 +50,7 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            //await SetInitialDataAsync();
+            await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
                 UserViewModel userDto = new UserViewModel { Email = model.Email, Password = model.Password };
