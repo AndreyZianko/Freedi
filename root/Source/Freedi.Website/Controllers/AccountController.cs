@@ -3,10 +3,7 @@ using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using Freedi.Website.Models;
 using Microsoft.Owin.Security;
-using Microsoft.Owin.Host.SystemWeb;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -89,7 +86,7 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            await SetInitialDataAsync();
+            //await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
                 UserViewModel userDto = new UserViewModel

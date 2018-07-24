@@ -71,9 +71,13 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Entites\Goods.cs" />
     <Compile Include="Entites\Order.cs" />
-    <Compile Include="Migrations\201807241509443_Init.cs" />
-    <Compile Include="Migrations\201807241509443_Init.Designer.cs">
-      <DependentUpon>201807241509443_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201807241619585_InitialCreate.cs" />
+    <Compile Include="Migrations\201807241619585_InitialCreate.Designer.cs">
+      <DependentUpon>201807241619585_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807241637221_AddSexClientProfile.cs" />
+    <Compile Include="Migrations\201807241637221_AddSexClientProfile.Designer.cs">
+      <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,8 +92,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807241509443_Init.resx">
-      <DependentUpon>201807241509443_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807241619585_InitialCreate.resx">
+      <DependentUpon>201807241619585_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807241637221_AddSexClientProfile.resx">
+      <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

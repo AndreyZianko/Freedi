@@ -55,6 +55,7 @@ namespace Freedi.Logic.Managers
 
         public async Task SetInitialData(UserViewModel adminDto, List<string> roles)
         {
+
             foreach (string roleName in roles)
             {
                 var role = await _uow.Users.RoleManager.FindByNameAsync(roleName);

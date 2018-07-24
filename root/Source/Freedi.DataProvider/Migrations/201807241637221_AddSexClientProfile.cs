@@ -1,18 +1,18 @@
 namespace Freedi.DataProvider.Migrations
 {
-    using Freedi.DataProvider.Models;
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class AddSexClientProfile : DbMigration
     {
         public override void Up()
         {
-
+            AddColumn("dbo.ClientProfiles", "Sex", c => c.String());
         }
         
         public override void Down()
         {
+            DropColumn("dbo.ClientProfiles", "Sex");
         }
     }
 }
