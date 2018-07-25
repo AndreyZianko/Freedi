@@ -30,9 +30,6 @@
                         <div class="col-md-6 text-right">
                             <div class="top_nav_right">
                                 <ul class="top_nav_menu">
-
-                                    <!-- Currency / Language / My Account -->
-
                                     <li class="currency">
                                         <a href="#">
                                             usd
@@ -65,6 +62,7 @@
                                         <ul class="account_selection">
                                             @if (Request.IsAuthenticated)
                                             {
+
                                                 <li>@Html.RouteLink("Sign Out", new { controller = "Account", action = "Logout" }, new { @class = "link" })</li>
                                             }
                                             else
@@ -72,10 +70,18 @@
                                                 <li>@Html.RouteLink("Sign In", new { controller = "Account", action = "Login" }, new { @class = "link" })</li>
                                                 <li>@Html.RouteLink("Register", new { controller = "Account", action = "Register" }, new { @class = "link" })</li>
                                             }
-                                            @*<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                                <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>*@
                                         </ul>
                                     </li>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        if (this.User.IsInRole("admin"))
+                                        {
+                                            <li class="account">
+                                                @Html.RouteLink("AdminPanel", new { controller = "Account", action = "Admin" }, new { @class = "link" })
+                                            </li>
+
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -225,5 +231,8 @@
     <script src="~/Scripts/TemplateScripts/custom.js"></script>
 
 
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/Scripts/Myscripts/MyJavaScript.js"></script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+﻿@model Freedi.Model.ViewModels.GoodsView
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/TemplateSideBar/SideBarStyles.css" rel="stylesheet" />
+<div class="wrapper">
+    <nav id="sidebar" class="">
+        <div class="sidebar-header">
+            <h3 style="color:white">Admin Panel</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#"><i class="fa fa-desktop"><span> Dashboard</span></i></a>
+            </li>
+            <li class="">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-book"><span> Catalog</span></i></a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Woman`s</a>
+                    </li>
+                    <li>
+                        <a href="#">Men`s</a>
+                    </li>
+                    <li>
+                        @Ajax.ActionLink("All", "Catalog","Home", new AjaxOptions { UpdateTargetId = "content" })
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-shopping-cart"><span> Sales</span></i></a>
+            </li>
+        </ul>
+    </nav>
+    <div id="content">
+
+    </div>
+</div>

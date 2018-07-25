@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Freedi.Logic.Managers
 {
-    public class UserManager : IUserManager
+    public class UserManager: IUserManager
     {
         IUnitOfWork _uow { get; set; }
         public UserManager(IUnitOfWork uow)
@@ -22,15 +22,15 @@ namespace Freedi.Logic.Managers
 
         public async Task<OperationDetails> Create(UserViewModel userDto)
         {
-            ApplicationUser user = await _uow.Users.UserManager.FindByEmailAsync(userDto.Email);
+            ApplicationUser user = await _uow.Users.UserManager().FindByEmailAsync(userDto.Email);
             if (user == null)
             {
                 user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
-                var result = await _uow.Users.UserManager.CreateAsync(user, userDto.Password);
+                var result = await _uow.Users.UserManager().CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
                 // добавляем роль
-                await _uow.Users.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                await _uow.Users.UserManager().AddToRoleAsync(user.Id, userDto.Role);
                 // создаем профиль клиента
                 ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
                 _uow.Users.Create(clientProfile);
@@ -47,9 +47,9 @@ namespace Freedi.Logic.Managers
         public async Task<ClaimsIdentity> Authenticate(UserViewModel userDto)
         {
             ClaimsIdentity claim = null;
-            ApplicationUser user = await _uow.Users.UserManager.FindAsync(userDto.Email, userDto.Password);
+            ApplicationUser user = await _uow.Users.UserManager().FindAsync(userDto.Email, userDto.Password);
             if (user != null)
-                claim = await _uow.Users.UserManager.CreateIdentityAsync(user,DefaultAuthenticationTypes.ApplicationCookie);
+                claim = await _uow.Users.UserManager().CreateIdentityAsync(user,DefaultAuthenticationTypes.ApplicationCookie);
             return claim;
         }
 
@@ -58,11 +58,11 @@ namespace Freedi.Logic.Managers
 
             foreach (string roleName in roles)
             {
-                var role = await _uow.Users.RoleManager.FindByNameAsync(roleName);
+                var role = await _uow.Users.RoleManager().FindByNameAsync(roleName);
                 if (role == null)
                 {
                     role = new ApplicationRole { Name = roleName };
-                    await _uow.Users.RoleManager.CreateAsync(role);
+                    await _uow.Users.RoleManager().CreateAsync(role);
                 }
             }
             await Create(adminDto);

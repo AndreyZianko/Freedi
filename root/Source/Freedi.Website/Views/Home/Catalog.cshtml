@@ -1,16 +1,9 @@
 ﻿@model IEnumerable<Freedi.Model.ViewModels.GoodsView>
 
-@{
-    ViewBag.Title = "Catalog";
-}
-
-<h2>Catalog</h2>
-<br>
-<br>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -75,7 +68,7 @@
             @Html.DisplayFor(modelItem => item.SKU)
         </td>
         <td>
-            <img src="@Html.DisplayFor(modelItem => item.Photo)" />
+            @Html.DisplayFor(modelItem => item.Photo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
@@ -84,11 +77,19 @@
             @Html.DisplayFor(modelItem => item.Sex)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+            @if (Request.IsAuthenticated)
+            {
+                if (this.User.IsInRole("admin"))
+                {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            }
+        }
+            </td>
+        </tr>
 }
 
 </table>

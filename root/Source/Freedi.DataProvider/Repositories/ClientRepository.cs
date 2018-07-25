@@ -13,21 +13,28 @@ namespace Freedi.DataProvider.Repositories
     public class ClientRepository : BaseRepository<ClientRepository>,IClientRepository
     {
         private FreediContext _context;
-        public ApplicationUserManager UserManager { get; }
-        public ApplicationRoleManager RoleManager { get; }
+        //public ApplicationUserManager UserManager { get; }
+        //public ApplicationRoleManager RoleManager { get; }
 
         public ClientRepository(FreediContext context) : base(context)
         {
             
             _context = context;
-            UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
-            RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));
+      
         }
 
         public void Create(ClientProfile item)
         {
             _context.ClientProfiles.Add(item);
             _context.SaveChanges();
+        }
+        public ApplicationUserManager UserManager()
+        {
+            return new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
+        }
+        public ApplicationRoleManager RoleManager()
+        {
+            return new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));
         }
     }
 }

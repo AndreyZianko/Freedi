@@ -38,9 +38,8 @@ namespace Freedi.Website.Controllers
        
         public ActionResult Login()
         {
-         if(User.Identity.IsAuthenticated)
+            if(User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
-
             return View();
         }
 
@@ -77,6 +76,12 @@ namespace Freedi.Website.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "admin")]
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
         public ActionResult Register()
         {
             return View();
@@ -107,6 +112,7 @@ namespace Freedi.Website.Controllers
             }
             return View(model);
         }
+
         private async Task SetInitialDataAsync()
         {
             await _um.SetInitialData(new UserViewModel

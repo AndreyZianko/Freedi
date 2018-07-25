@@ -240,6 +240,7 @@
     <Content Include="Content\TemplateImages\single_3.jpg" />
     <Content Include="Content\TemplateImages\single_3_thumb.jpg" />
     <Content Include="Content\TemplateImages\slider_1.jpg" />
+    <Content Include="Content\TemplateSideBar\SideBarStyles.css" />
     <Content Include="Content\TemplateStyles\bootstrap4\bootstrap.min.css" />
     <Content Include="Content\TemplateStyles\bootstrap4\bootstrap.min.js" />
     <Content Include="Content\TemplateStyles\bootstrap4\popper.js" />
@@ -266,6 +267,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -340,10 +343,11 @@
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.eot" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.woff" />
-    <Content Include="Views\Home\Catalog.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Admin.cshtml" />
+    <Content Include="Views\Home\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
