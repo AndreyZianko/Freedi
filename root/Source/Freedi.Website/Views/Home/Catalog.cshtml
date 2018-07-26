@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Freedi.Model.ViewModels.GoodsView>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-responsive">
     <tr>
         <th>
@@ -38,7 +35,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Sex)
         </th>
-        <th></th>
+        <th>
+            Edit
+        </th>
+        <th>
+            Details
+        </th>
+        <th>
+            <p>Delete
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -68,7 +73,7 @@
             @Html.DisplayFor(modelItem => item.SKU)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Photo)
+            <img src="@Html.DisplayFor(modelItem => item.Photo)" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
@@ -76,20 +81,28 @@
         <td>
             @Html.DisplayFor(modelItem => item.Sex)
         </td>
-        <td>
-            @if (Request.IsAuthenticated)
+        
+
+        @if (Request.IsAuthenticated)
+        {
+            if (this.User.IsInRole("admin"))
             {
-                if (this.User.IsInRole("admin"))
-                {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+                </td>
+                <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
+
+
             }
         }
-            </td>
-        </tr>
+
+    </tr>
 }
 
 </table>

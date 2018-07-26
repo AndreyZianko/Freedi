@@ -176,9 +176,17 @@
                     <li class="menu_item"><a href="#">home</a></li>
                     <li class="menu_item"><a href="#">shop</a></li>
                     <li class="menu_item"><a href="#">promotion</a></li>
-                    <li class="menu_item"><a href="#">pages</a></li>
-                    <li class="menu_item"><a href="#">blog</a></li>
-                    <li class="menu_item"><a href="#">contact</a></li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (this.User.IsInRole("admin"))
+                        {
+                            <li class="menu_item">
+                                @Html.RouteLink("AdminPanel", new { controller = "Account", action = "Admin" }, new { @class = "link" })
+                            </li>
+
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -223,16 +231,11 @@
     <script src="~/Scripts/TemplateScripts/jquery-3.2.1.min.js"></script>
     <script src="~/Content/TemplateStyles/bootstrap4/popper.js"></script>
     <script src="~/Content/TemplateStyles/bootstrap4/bootstrap.min.js"></script>
-
-
     <script src="~/Scripts/TemplatePlugins/Isotope/isotope.pkgd.min.js"></script>
     <script src="~/Scripts/TemplatePlugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
     <script src="~/Scripts/TemplatePlugins/easing/easing.js"></script>
     <script src="~/Scripts/TemplateScripts/custom.js"></script>
-
-
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
     <script src="~/Scripts/Myscripts/MyJavaScript.js"></script>
 </body>
 </html>

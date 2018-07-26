@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -651,6 +651,7 @@ section
 .hamburger_container:hover i
 {
 	color: #b5aec4;
+    cursor: pointer;
 }
 .hamburger_menu
 {
@@ -690,6 +691,7 @@ section
 .hamburger_close
 {
 	position: absolute;
+    
 	top: 26px;
 	right: 10px;
 	padding: 10px;
@@ -708,6 +710,7 @@ section
 .hamburger_close:hover i
 {
 	color: #b5aec4;
+    cursor:pointer;
 }
 .hamburger_menu_content
 {
@@ -736,6 +739,7 @@ section
 .menu_item > a:hover
 {
 	color: #b5aec4;
+
 }
 .menu_item > a > i
 {
