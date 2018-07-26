@@ -30,12 +30,13 @@ namespace Freedi.Website.Controllers
             }
         }
 
-  
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
-       
+
+        [AllowAnonymous]
         public ActionResult Login()
         {
             if(User.Identity.IsAuthenticated)
@@ -44,6 +45,7 @@ namespace Freedi.Website.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
@@ -82,12 +84,14 @@ namespace Freedi.Website.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {

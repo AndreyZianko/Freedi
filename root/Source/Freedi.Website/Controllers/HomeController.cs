@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Freedi.Website.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         IOrderManager _orderManager;
@@ -17,7 +18,6 @@ namespace Freedi.Website.Controllers
             _goodsManager = goodsManager;
         }
 
-       
         public ActionResult Index()
         {
             return View();

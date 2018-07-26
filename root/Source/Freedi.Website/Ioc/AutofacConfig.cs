@@ -9,8 +9,6 @@ namespace Freedi.Website.Ioc
 {
     public class AutofacConfig
     {
-
-      
         public static void ConfigureContainer()
         {
             var builder = new ContainerBuilder();
@@ -21,7 +19,6 @@ namespace Freedi.Website.Ioc
             builder.RegisterModule<AutofacWebTypesModule>();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
         }
     }
 }
