@@ -34,13 +34,13 @@ namespace Freedi.Logic.Managers
             _uow.Save();
         }
 
-        public IEnumerable<GoodsView> GetGoods()
+        public IEnumerable<GoodsViewModel> GetGoods()
         {
             var allgoods = _uow.Goods.GetAll();
-            var result = new List<GoodsView>();
+            var result = new List<GoodsViewModel>();
             foreach (var goods in allgoods)
             {
-                result.Add(new GoodsView
+                result.Add(new GoodsViewModel
                 {
                     Id = goods.Id,
                     Name = goods.Name,
@@ -62,13 +62,13 @@ namespace Freedi.Logic.Managers
             return result;
         }
 
-        public GoodsView GetGood(int? id)
+        public GoodsViewModel GetGood(int? id)
         {
 
             if (id != null)
             {
                 var good = _uow.Goods.Get(id);
-                return new GoodsView { Id = good.Id, Name = good.Name, Price = good.Price };
+                return new GoodsViewModel { Id = good.Id, Name = good.Name, Price = good.Price };
             }
             else
                 return null;

@@ -13,13 +13,13 @@ namespace Freedi.Logic.Managers
             _uow = uow;
 
         }
-        public List<GoodsView> GetGoods()
+        public List<GoodsViewModel> GetGoods()
         {
             var allgoods = _uow.Goods.GetAll();
-            var result = new List<GoodsView>();
+            var result = new List<GoodsViewModel>();
             foreach (var goods in allgoods)
             {
-                result.Add(new GoodsView
+                result.Add(new GoodsViewModel
                 {
                     Id = goods.Id,
                     Name = goods.Name,
@@ -40,10 +40,10 @@ namespace Freedi.Logic.Managers
             }
             return result;
         }
-        public GoodsView GetGoodsById(int? Id)
+        public GoodsViewModel GetGoodsById(int? Id)
         {
             var _goods = _uow.Goods.Get(Id);
-            return (new GoodsView
+            return (new GoodsViewModel
             {
                 Id = _goods.Id,
                 Name = _goods.Name,
@@ -58,6 +58,26 @@ namespace Freedi.Logic.Managers
                 Unit = _goods.Unit,
                 Stock = _goods.Stock
             });
+        }
+
+        public bool GoodsUpdate(GoodsViewModel g)
+        {
+            var item = _uow.Goods.Get(g.Id);
+            item.Name = g.Name;
+            item.Price = g.Price;
+            item.Sex = g.Sex;
+            item.SKU = g.SKU;
+            item.StockQuantity = g.StockQuantity;
+            item.Unit = g.Unit;
+            item.Type = g.Type;
+            item.Currency = g.Currency;
+            item.Description = g.Description;
+            item.Photo = g.Photo;
+            item.Stock = g.Stock;
+      
+            _uow.Goods.Update(item);
+            _uow.Save();
+            return true;
         }
     }
 }

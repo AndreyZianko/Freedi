@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClientProfileViewModel.cs" />
-    <Compile Include="ViewModels\GoodViewModel.cs" />
+    <Compile Include="ViewModels\GoodsViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>

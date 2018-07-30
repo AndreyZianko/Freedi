@@ -1,6 +1,6 @@
 ﻿namespace Freedi.Model.ViewModels
 {
-    public class GoodsView
+    public class GoodsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

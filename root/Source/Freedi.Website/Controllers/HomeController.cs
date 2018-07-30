@@ -1,8 +1,5 @@
 ﻿using Freedi.Logic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Freedi.Model.ViewModels;
 using System.Web.Mvc;
 
 namespace Freedi.Website.Controllers
@@ -43,6 +40,12 @@ namespace Freedi.Website.Controllers
                 return PartialView("ParticularProductView", _goodsManager.GetGoodsById(Id));
             }
            return  PartialView("Catalog", _goodsManager.GetGoods()); 
+        }
+        [HttpPost]
+        public ActionResult Catalog(GoodsViewModel goods)
+        {
+
+            return  _goodsManager.GoodsUpdate(goods) ? Content("Success") : Content("False");
         }
     }
 }
