@@ -39,7 +39,7 @@ namespace Freedi.Website.Controllers
             {
                 return PartialView("ParticularProductView", _goodsManager.GetGoodsById(Id));
             }
-           return  PartialView("Catalog", _goodsManager.GetGoods()); 
+           return  PartialView("CatalogPartialView", _goodsManager.GetGoods()); 
         }
         [HttpPost]
         public ActionResult Catalog(GoodsViewModel goods)
