@@ -36,9 +36,13 @@ namespace Freedi.Website.Controllers
 
             return View();
         }
-        public ActionResult Catalog()
+        public ActionResult Catalog(int? Id)
         {
-           return PartialView("Catalog", _goodsManager.GetGoods()); 
+            if (Id != null)
+            {
+                return PartialView("ParticularProductView", _goodsManager.GetGoodsById(Id));
+            }
+           return  PartialView("Catalog", _goodsManager.GetGoods()); 
         }
     }
 }

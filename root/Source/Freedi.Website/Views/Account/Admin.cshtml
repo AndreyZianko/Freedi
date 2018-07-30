@@ -24,7 +24,7 @@
                         <a href="#">Men`s</a>
                     </li>
                     <li>
-                        @Ajax.ActionLink("All", "Catalog","Home", new AjaxOptions { UpdateTargetId = "content" })
+                        @Ajax.ActionLink("All", "Catalog", "Home", new AjaxOptions { UpdateTargetId = "content" })
                     </li>
                 </ul>
             </li>
@@ -36,4 +36,28 @@
     <div id="content">
 
     </div>
+
+    <div class="modal fade in" id="myModal" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <section id="ChageFrom">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div id="productList" class="col-md-10">
+                               
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="modal-footer">
+
+                            <button type="button" id="change" class="btn btn-success" data-dismiss="modal">Изменить</button>
+                        </div>
+                </div>
+                </section>
+            </div>
+    </div>
+
 </div>

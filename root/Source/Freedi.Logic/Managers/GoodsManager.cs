@@ -40,5 +40,24 @@ namespace Freedi.Logic.Managers
             }
             return result;
         }
+        public GoodsView GetGoodsById(int? Id)
+        {
+            var _goods = _uow.Goods.Get(Id);
+            return (new GoodsView
+            {
+                Id = _goods.Id,
+                Name = _goods.Name,
+                Price = _goods.Price,
+                Currency = _goods.Currency,
+                Sex = _goods.Sex,
+                Photo = _goods.Photo,
+                StockQuantity = _goods.StockQuantity,
+                SKU = _goods.SKU,
+                Description = _goods.Description,
+                Type = _goods.Type,
+                Unit = _goods.Unit,
+                Stock = _goods.Stock
+            });
+        }
     }
 }

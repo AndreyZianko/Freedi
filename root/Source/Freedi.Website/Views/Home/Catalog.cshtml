@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Freedi.Model.ViewModels.GoodsView>
 
-<table class="table table-responsive">
+<table id ="Goods" class="table table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -87,15 +87,18 @@
         {
             if (this.User.IsInRole("admin"))
             {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Catalog", "Home", new { id = item.Id },new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
+
+
+        </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.Id })
 
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                 
                 </td>
 
 

@@ -11,5 +11,6 @@ namespace Freedi.Logic.Interfaces
     public interface IGoodsManager
     {
         List<GoodsView> GetGoods();
+        GoodsView GetGoodsById(int? Id);
     }
 }
