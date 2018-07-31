@@ -78,11 +78,7 @@ namespace Freedi.Website.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = "admin")]
-        public ActionResult Admin()
-        {
-            return View();
-        }
+       
 
         [AllowAnonymous]
         public ActionResult Register()

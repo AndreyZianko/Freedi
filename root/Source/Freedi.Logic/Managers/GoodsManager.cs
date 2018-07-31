@@ -1,4 +1,5 @@
 ﻿using Freedi.DataProvider.Interfaces;
+using Freedi.DataProvider.Models;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using System.Collections.Generic;
@@ -60,24 +61,59 @@ namespace Freedi.Logic.Managers
             });
         }
 
-        public bool GoodsUpdate(GoodsViewModel g)
+        public bool GoodsUpdate(GoodsViewModel _goodsViewModel)
         {
-            var item = _uow.Goods.Get(g.Id);
-            item.Name = g.Name;
-            item.Price = g.Price;
-            item.Sex = g.Sex;
-            item.SKU = g.SKU;
-            item.StockQuantity = g.StockQuantity;
-            item.Unit = g.Unit;
-            item.Type = g.Type;
-            item.Currency = g.Currency;
-            item.Description = g.Description;
-            item.Photo = g.Photo;
-            item.Stock = g.Stock;
+            var _product = _uow.Goods.Get(_goodsViewModel.Id);
+            _product.Name = _goodsViewModel.Name;
+            _product.Price = _goodsViewModel.Price;
+            _product.Sex = _goodsViewModel.Sex;
+            _product.SKU = _goodsViewModel.SKU;
+            _product.StockQuantity = _goodsViewModel.StockQuantity;
+            _product.Unit = _goodsViewModel.Unit;
+            _product.Type = _goodsViewModel.Type;
+            _product.Currency = _goodsViewModel.Currency;
+            _product.Description = _goodsViewModel.Description;
+            _product.Photo = _goodsViewModel.Photo;
+            _product.Stock = _goodsViewModel.Stock;
       
-            _uow.Goods.Update(item);
+            _uow.Goods.Update(_product);
             _uow.Save();
             return true;
+        }
+
+        public bool CreateProduct(GoodsViewModel _goodsViewModel)
+        {
+            Goods _product = new Goods();
+            _product.Name = _goodsViewModel.Name;
+            _product.Price = _goodsViewModel.Price;
+            _product.Sex = _goodsViewModel.Sex;
+            _product.SKU = _goodsViewModel.SKU;
+            _product.StockQuantity = _goodsViewModel.StockQuantity;
+            _product.Unit = _goodsViewModel.Unit;
+            _product.Type = _goodsViewModel.Type;
+            _product.Currency = _goodsViewModel.Currency;
+            _product.Description = _goodsViewModel.Description;
+            _product.Photo = _goodsViewModel.Photo;
+            _product.Stock = _goodsViewModel.Stock;
+            _uow.Goods.Create(_product);
+            _uow.Save();
+            return true;
+        }
+
+        public bool DeleteProduct(int Id)
+        {
+            if (_uow.Goods.Delete(Id))
+            {
+                _uow.Save();
+
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
