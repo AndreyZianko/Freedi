@@ -1672,7 +1672,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MyScripts\FreediJS.js" />
     <Content Include="Scripts\MyScripts\jquery.dataTables.js" />
-    <Content Include="Scripts\MyScripts\UploadImg.js" />
+    <Content Include="Scripts\MyScripts\jquery.imageuploader.js" />
+    <Content Include="Scripts\MyScripts\styles.imageuploader.css" />
     <Content Include="Scripts\TemplatePlugins\easing\easing.js" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\css\font-awesome.min.css" />
@@ -1753,7 +1754,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\PartialGoods\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,7 +1,7 @@
 ﻿@model Freedi.Model.ViewModels.GoodsViewModel
 <link href="~/Content/img/bootstrap-imageupload.css" rel="stylesheet" />
-
-@using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post,  new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+<link href="~/Scripts/MyScripts/styles.imageuploader.css" rel="stylesheet" />
+@using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -90,51 +90,27 @@
             </div>
         </div>
         <div class="form-group">
-            @*@Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        @*@Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-12">
                 @*@Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })*@
-                <div class="imageupload panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <h6 class="panel-title pull-left">Upload Image</h6>
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default active">File</button>
-                            <button type="button" class="btn btn-default">URL</button>
-                        </div>
-                    </div>
-                    <div class="file-tab panel-body">
-                        <label class="btn btn-default btn-file">
-                            <span>Browse</span>
-                            <!-- The file is stored here. -->
-                            <input type="file" name="UploadedFile">
-                        </label>
-                        <button type="button" class="btn btn-default">Remove</button>
-                    </div>
-                    <div class="url-tab panel-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control hasclear" placeholder="Image URL">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default">Submit</button>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-default">Remove</button>
-                        <!-- The URL is stored here. -->
-                        <input type="hidden" name="image-url">
-                    </div>
+        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })*@
+                @*UploadedFile*@
+               <div class="uploader__box js-uploader__box l-center-box">
+                <div class="uploader__contents">
+                    <label class="button button--secondary" for="fileinput">Select Files</label>
+                    <input id="fileinput" class="uploader__file-input" name="UploadedFile" type="file" multiple value="Select Files">
                 </div>
-                <button type="button" id="imageupload-disable" class="btn btn-danger">Disable</button>
-                <button type="button" id="imageupload-enable" class="btn btn-success">Enable</button>
-                <button type="button" id="imageupload-reset" class="btn btn-primary">Reset</button>
+                <input class="button button--big-bottom" type="submit" value="Upload Selected Files">
+        </div>
+            </div>
+         </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<script src="~/Scripts/MyScripts/FreediJS.js"></script>
-<script src="~/Scripts/MyScripts/UploadImg.js"></script>
+    
+        }
+        <script src="~/Scripts/MyScripts/jquery.imageuploader.js"></script>
+        <script src="~/Scripts/MyScripts/FreediJS.js"></script>

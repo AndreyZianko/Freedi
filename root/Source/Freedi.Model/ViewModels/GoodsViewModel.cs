@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 
 namespace Freedi.Model.ViewModels
 {
@@ -6,7 +7,6 @@ namespace Freedi.Model.ViewModels
     {
         
         public int Id { get; set; }
-      
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }

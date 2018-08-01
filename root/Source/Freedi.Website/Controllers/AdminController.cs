@@ -43,14 +43,20 @@ namespace Freedi.Website.Controllers
         }
         [HttpPost]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
-        {
+        { 
+            //foreach (var file in _goodsViewModel.UploadedFile)
+            //{
+            //    if (file != null && file.ContentLength > 0)
+            //    {
+            //       var k = file.FileName;
+            //    }
+            //}
 
-           
             if (_goodsViewModel.UploadedFile != null)
             {
                 _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
             }
-           
+
             if ((_goodsManager.CreateProduct(_goodsViewModel)))
                 return View("AdminView");
             return View("AdminView");

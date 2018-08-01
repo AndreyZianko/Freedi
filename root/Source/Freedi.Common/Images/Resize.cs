@@ -9,10 +9,10 @@ namespace Freedi.Common.Images
     {
         public static string ResizeImg(this HttpPostedFileBase _uploadfile, string name)
         {
+            //Directory.CreateDirectory(@"..\Content\PhotoProduct\" + name);
             string Pth = Path.Combine(@"..\Content\PhotoProduct\" + name + Path.GetExtension(_uploadfile.FileName)).Trim();
             WebImage img = new WebImage(_uploadfile.InputStream);
-            if (img.Width > 500)
-                img.Resize(250, 250);
+            img.Resize(250, 250);
             img.Save(Pth);
 
             return Pth;
