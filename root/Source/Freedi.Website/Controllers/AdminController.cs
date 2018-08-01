@@ -22,17 +22,19 @@ namespace Freedi.Website.Controllers
         }
         public ActionResult Admin()
         {
-            return View();
+            return View("AdminView");
         }
 
-        public ActionResult Catalog(int? Id)
+        public ActionResult Catalog()
         {
-            if (Id != null)
-            {
-                return PartialView("ParticularProductView", _goodsManager.GetGoodsById(Id));
-            }
             return PartialView("CatalogPartialView", _goodsManager.GetGoods());
         }
+
+        public ActionResult EditProduct(int? Id)
+        {
+          return PartialView("EditProductView", _goodsManager.GetGoodsById(Id));
+        }
+
         public ActionResult CreateProduct()
         {
             return PartialView("CreateProductPartialVIew");
@@ -55,19 +57,22 @@ namespace Freedi.Website.Controllers
 
             return View("Admin");
         }
-
+        
         public ActionResult DeleteProduct(int? Id)
+        {
+
+            return  PartialView("DeleteProductView", _goodsManager.GetGoodsById(Id));
+                 
+        }
+        [HttpPost]
+        public ActionResult DeleteProductConfirm(int? Id)
         {
             if (Id != null)
             {
                 _goodsManager.DeleteProduct((int)Id);
-                 return View("Admin");
+                return RedirectToAction("Admin");
             }
-            else
-            {
-                return View("Admin");
-            }
-            
+            return PartialView("DeleteProductView", _goodsManager.GetGoodsById(Id));
         }
     }
 }
