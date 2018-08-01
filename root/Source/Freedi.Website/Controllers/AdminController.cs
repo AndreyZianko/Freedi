@@ -2,10 +2,12 @@
 using Freedi.Model.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
-
+using Freedi.Common.Images;
 namespace Freedi.Website.Controllers
 {
     [Authorize(Roles = "admin")]
@@ -43,9 +45,15 @@ namespace Freedi.Website.Controllers
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
         {
 
-           if((_goodsManager.CreateProduct(_goodsViewModel)))
-                return View("Admin");
-            return View("Admin");
+           
+            if (_goodsViewModel.UploadedFile != null)
+            {
+                _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
+            }
+           
+            if ((_goodsManager.CreateProduct(_goodsViewModel)))
+                return View("AdminView");
+            return View("AdminView");
         }
 
 

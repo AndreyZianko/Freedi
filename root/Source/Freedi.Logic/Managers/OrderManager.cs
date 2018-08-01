@@ -47,7 +47,7 @@ namespace Freedi.Logic.Managers
                     Price = goods.Price,
                     Currency = goods.Currency,
                     Sex = goods.Sex,
-                    Photo = goods.Photo,
+                    //Photo = goods.Photo,
                     StockQuantity = goods.StockQuantity,
                     SKU = goods.SKU,
                     Description = goods.Description,

@@ -57,6 +57,7 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1553,6 +1554,7 @@
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Content\img\bootstrap-imageupload.css" />
     <Content Include="Content\img\loading-white-d.gif" />
+    <Content Include="Content\PhotoProduct\1.png" />
     <Content Include="Content\TemplateImages\banner_1.jpg" />
     <Content Include="Content\TemplateImages\banner_2.jpg" />
     <Content Include="Content\TemplateImages\banner_3.jpg" />
@@ -1743,7 +1745,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\CatalogPartialView.cshtml" />
     <Content Include="Views\Admin\EditProductView.cshtml" />
     <Content Include="Views\Admin\CreateProductPartialVIew.cshtml" />
@@ -1764,6 +1765,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Freedi.Common\Freedi.Common.csproj">
+      <Project>{bb060ec9-da6f-4fd6-a42a-9dd9a922eaf2}</Project>
+      <Name>Freedi.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Freedi.Logic\Freedi.Logic.csproj">
       <Project>{d3877976-8326-4665-ba5d-5035dffdd543}</Project>
       <Name>Freedi.Logic</Name>

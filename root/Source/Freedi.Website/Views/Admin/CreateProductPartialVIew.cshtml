@@ -1,7 +1,7 @@
 ﻿@model Freedi.Model.ViewModels.GoodsViewModel
 <link href="~/Content/img/bootstrap-imageupload.css" rel="stylesheet" />
 
-@using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post,  new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -106,7 +106,7 @@
                         <label class="btn btn-default btn-file">
                             <span>Browse</span>
                             <!-- The file is stored here. -->
-                            <input type="file" name="image-file">
+                            <input type="file" name="UploadedFile">
                         </label>
                         <button type="button" class="btn btn-default">Remove</button>
                     </div>
