@@ -18,8 +18,9 @@ namespace Freedi.Website.Controllers
         public AccountController(IUserManager um)
         {
             _um = um;
-            
-          
+         
+
+
         }
         private IAuthenticationManager AuthenticationManager
         {
