@@ -10,6 +10,7 @@ namespace Freedi.DataProvider
         public virtual DbSet<Goods> Goods { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ClientProfile> ClientProfiles { get; set; }
+        public virtual DbSet<Photos> Photos { get; set; }
 
         static FreediContext()
         {
@@ -24,12 +25,12 @@ namespace Freedi.DataProvider
         }
     }
 
-    public class StoreDbInitializer : DropCreateDatabaseIfModelChanges<FreediContext>
+    public class StoreDbInitializer : CreateDatabaseIfNotExists<FreediContext>
     {
         protected override void Seed(FreediContext context)
         {
 
-            context.Goods.Add(new Goods { Name = "Leather Bag", Sex = "Women", Type = "Bag", Price = 220, Currency = "USD", Description = "Very beautiful bag", Photo = "/Content/TemplateImages/product_4.png", SKU = "LB220", Stock = true, StockQuantity = 11, Unit = "pieces" });
+            context.Goods.Add(new Goods { Name = "Leather Bag", Sex = "Women", Type = "Bag", Price = 220, Currency = "USD", Description = "Very beautiful bag", SKU = "LB220", Stock = true, StockQuantity = 11, Unit = "pieces" });
             context.SaveChanges();
         }
     }

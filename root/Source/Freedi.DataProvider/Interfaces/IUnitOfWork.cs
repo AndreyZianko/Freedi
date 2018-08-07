@@ -8,6 +8,7 @@ namespace Freedi.DataProvider.Interfaces
         IGoodRepository Goods{ get; }
         IOrderRepository Orders{ get; }
         IClientRepository Users { get; }
+        IPhotosRepository Photos { get; }
         void Save();
         Task SaveAsync();
     }

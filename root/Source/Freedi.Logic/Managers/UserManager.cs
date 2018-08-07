@@ -29,9 +29,7 @@ namespace Freedi.Logic.Managers
                 var result = await _uow.Users.UserManager().CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
-                // добавляем роль
                 await _uow.Users.UserManager().AddToRoleAsync(user.Id, userDto.Role);
-                // создаем профиль клиента
                 ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
                 _uow.Users.Create(clientProfile);
                 await _uow.SaveAsync();

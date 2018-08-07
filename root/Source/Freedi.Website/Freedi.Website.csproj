@@ -1670,9 +1670,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\MyScripts\FormSend.js" />
     <Content Include="Scripts\MyScripts\FreediJS.js" />
     <Content Include="Scripts\MyScripts\jquery.dataTables.js" />
     <Content Include="Scripts\MyScripts\jquery.imageuploader.js" />
+    <Content Include="Scripts\MyScripts\ResponseJS.js" />
     <Content Include="Scripts\MyScripts\styles.imageuploader.css" />
     <Content Include="Scripts\TemplatePlugins\easing\easing.js" />
     <Content Include="Scripts\TemplatePlugins\font-awesome-4.7.0\css\font-awesome.css" />
@@ -1751,6 +1753,7 @@
     <Content Include="Views\Admin\CreateProductPartialVIew.cshtml" />
     <Content Include="Views\Admin\AdminView.cshtml" />
     <Content Include="Views\Admin\DeleteProductView.cshtml" />
+    <Content Include="Views\Shared\SuccessPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

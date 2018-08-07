@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Freedi.DataProvider.Entites;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Freedi.DataProvider.Models
@@ -17,9 +19,11 @@ namespace Freedi.DataProvider.Models
         public int StockQuantity { get; set; }
         public bool Stock { get; set; }
         public string SKU { get; set; }
-        public string Photo { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
+        public virtual ICollection<Photos> Photos { get; set; }
+
     }
+
 }
 

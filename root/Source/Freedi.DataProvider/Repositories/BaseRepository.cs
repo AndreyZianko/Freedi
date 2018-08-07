@@ -22,6 +22,7 @@ namespace Freedi.DataProvider.Repositories
         public void Create(T item)
         {
             _dbset.Add(item);
+
         }
 
         public bool Delete(int id)

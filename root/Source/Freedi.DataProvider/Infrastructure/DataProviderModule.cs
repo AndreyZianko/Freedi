@@ -19,7 +19,7 @@ namespace Freedi.DataProvider.Infrastructure
             builder.RegisterType<GoodRepository>().As<IGoodRepository>().InstancePerRequest();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerRequest();
             builder.RegisterType<ClientRepository>().As<IClientRepository>().InstancePerRequest();
-            
+            builder.RegisterType<PhotosRepository>().As<IPhotosRepository>().InstancePerRequest();
         }
 
     }

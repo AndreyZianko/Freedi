@@ -59,6 +59,7 @@
     <Compile Include="Entites\ApplicationRole.cs" />
     <Compile Include="Entites\ApplicationUser.cs" />
     <Compile Include="Entites\ClientProfile.cs" />
+    <Compile Include="Entites\Photos.cs" />
     <Compile Include="FreediContext.cs" />
     <Compile Include="Identity\ApplicationRoleManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Interfaces\IGoodRepository.cs" />
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IPhotosRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Entites\Goods.cs" />
@@ -79,10 +81,15 @@
     <Compile Include="Migrations\201807241637221_AddSexClientProfile.Designer.cs">
       <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808051657291_Photos.cs" />
+    <Compile Include="Migrations\201808051657291_Photos.Designer.cs">
+      <DependentUpon>201808051657291_Photos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\PhotosRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\GoodRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
@@ -97,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807241637221_AddSexClientProfile.resx">
       <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808051657291_Photos.resx">
+      <DependentUpon>201808051657291_Photos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

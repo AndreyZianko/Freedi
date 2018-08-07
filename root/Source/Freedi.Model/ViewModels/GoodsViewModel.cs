@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Freedi.Model.ValidateImage;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace Freedi.Model.ViewModels
@@ -15,8 +17,10 @@ namespace Freedi.Model.ViewModels
         public int StockQuantity { get; set; }
         public bool Stock { get; set; }
         public string SKU { get; set; }
-        public string Photo { get; set; }
-        public HttpPostedFileBase UploadedFile { get; set; }
+        public List<PhotosViewModel> Photo { get; set; }
+        public int PhotoCount { get; set; }
+        //[FileType("JPG,JPEG,PNG")]
+        public List<HttpPostedFileBase> UploadedFile { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
     }

@@ -39,6 +39,9 @@
                     @Html.DisplayNameFor(model => model.Photo)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.PhotoCount)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
@@ -85,6 +88,9 @@
                     @Html.DisplayNameFor(model => model.Photo)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.PhotoCount)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
@@ -104,62 +110,66 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Currency)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Unit)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StockQuantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Stock)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SKU)
-                    </td>
-                    <td>
-                        <img src="@Html.DisplayFor(modelItem => item.Photo)" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sex)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKU)
+                </td>
+                <td>
+                    <img id="@item.Photo.Select(x=>x.PhotoId).FirstOrDefault()"src="@item.Photo.Select(x=>x.PhotoPath).FirstOrDefault()" />
+            
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhotoCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
 
 
-                    @if (Request.IsAuthenticated)
+                @if (Request.IsAuthenticated)
+                {
+                    if (this.User.IsInRole("admin"))
                     {
-                        if (this.User.IsInRole("admin"))
-                        {
 
-                            <td>
-                                @Ajax.ActionLink("Edit", "EditProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.Id })
-                            </td>
-                            <td>
-                                @Ajax.ActionLink("Delete", "DeleteProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
-                            </td>
+                        <td>
+                            @Ajax.ActionLink("Edit", "EditProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </td>
+                        <td>
+                            @Ajax.ActionLink("Delete", "DeleteProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
+                        </td>
 
 
-                        }
                     }
+                }
 
-                </tr>
+            </tr>
             }
         </tbody>
     </table>

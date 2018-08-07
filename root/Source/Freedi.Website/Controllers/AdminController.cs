@@ -43,23 +43,26 @@ namespace Freedi.Website.Controllers
         }
         [HttpPost]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
-        { 
-            //foreach (var file in _goodsViewModel.UploadedFile)
-            //{
-            //    if (file != null && file.ContentLength > 0)
-            //    {
-            //       var k = file.FileName;
-            //    }
-            //}
-
-            if (_goodsViewModel.UploadedFile != null)
+        {
+            if (ModelState.IsValid)
             {
-                _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
-            }
+                if (_goodsViewModel.UploadedFile != null)
+                {
+                    foreach (var file in _goodsViewModel.UploadedFile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
 
-            if ((_goodsManager.CreateProduct(_goodsViewModel)))
-                return View("AdminView");
-            return View("AdminView");
+                        }
+                    }
+                }
+                if ((_goodsManager.CreateProduct(_goodsViewModel)))
+                    return View("SuccessPartialView");
+              
+            }          
+            return PartialView("CreateProductPartialVIew", _goodsViewModel);
+            
         }
 
 
@@ -67,7 +70,7 @@ namespace Freedi.Website.Controllers
         public ActionResult Catalog(GoodsViewModel goods)
         {
             if(_goodsManager.GoodsUpdate(goods) )
-                return View("Admin");
+                return View("SuccessPartialView");
 
             return View("Admin");
         }
@@ -81,10 +84,11 @@ namespace Freedi.Website.Controllers
         [HttpPost]
         public ActionResult DeleteProductConfirm(int? Id)
         {
+            
             if (Id != null)
             {
                 _goodsManager.DeleteProduct((int)Id);
-                return RedirectToAction("Admin");
+                return View("SuccessPartialView");
             }
             return PartialView("DeleteProductView", _goodsManager.GetGoodsById(Id));
         }
