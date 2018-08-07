@@ -42,27 +42,33 @@ namespace Freedi.Website.Controllers
             return PartialView("CreateProductPartialVIew");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (_goodsViewModel.UploadedFile != null)
+                return PartialView("CreateProductPartialVIew", _goodsViewModel);
+            }
+          
+            if (_goodsViewModel.UploadedFile[0]!=null)
+            {
+                foreach (var file in _goodsViewModel.UploadedFile)
                 {
-                    foreach (var file in _goodsViewModel.UploadedFile)
+                    if (file != null && file.ContentLength > 0)
                     {
-                        if (file != null && file.ContentLength > 0)
-                        {
-                            _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
+                        _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
 
-                        }
                     }
                 }
-                if ((_goodsManager.CreateProduct(_goodsViewModel)))
-                    return View("SuccessPartialView");
-              
-            }          
-            return PartialView("CreateProductPartialVIew", _goodsViewModel);
-            
+                
+            }
+
+            if (_goodsManager.CreateProduct(_goodsViewModel))
+            { 
+                return Content("Success");
+            }
+
+            return Content("error");
         }
 
 

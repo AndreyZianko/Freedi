@@ -1,9 +1,8 @@
-﻿ $(function () {
-        $("#CreateForm").submit(function (event) {
+﻿$(function () {
+        $("#CreateForm").on('submit', function (event) {
             var dataString;
             debugger;
             event.preventDefault();
-
             var action = $("#CreateForm").attr("action");
             if ($("#CreateForm").attr("enctype") == "multipart/form-data") {
                 dataString = new FormData($("#CreateForm").get(0));

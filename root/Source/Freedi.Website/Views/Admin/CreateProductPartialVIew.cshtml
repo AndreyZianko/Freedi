@@ -1,11 +1,45 @@
-﻿@{
+﻿
+
+@{
     Layout = null;
 }
 @model Freedi.Model.ViewModels.GoodsViewModel
 @*<link href="~/Content/img/bootstrap-imageupload.css" rel="stylesheet" />
     <link href="~/Scripts/MyScripts/styles.imageuploader.css" rel="stylesheet" />*@
+<script>
+    $(function () {
+        $("#CreateForm").on('submit', function (event) {
+            var dataString;
+            debugger;
+            event.preventDefault();
+            var action = $("#CreateForm").attr("action");
+            if ($("#CreateForm").attr("enctype") == "multipart/form-data") {
+                dataString = new FormData($("#CreateForm").get(0));
+                contentType = false;
+                processData = false;
+            } else {
+                // regular form, do your own thing if you need it
+            }
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: dataString,
+                dataType: "json", //change to your own, else read my note above on enabling the JsonValueProviderFactory in MVC
+                contentType: contentType,
+                processData: processData,
+                async: false,
+                success: function (data) {
+                    var k = data;
+                    debugger;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
 
-
+                    alert("fail");
+                }
+            });
+        }); //end .submit()
+    });
+</script>
 
 
 
@@ -120,7 +154,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="Create" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -130,6 +164,5 @@
     <script src="~/Scripts/MyScripts/FreediJS.js"></script>*@
 
 
-    <script src="~/Scripts/MyScripts/FormSend.js"></script>
 
 
