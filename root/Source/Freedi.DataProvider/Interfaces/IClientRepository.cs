@@ -11,8 +11,6 @@ namespace Freedi.DataProvider.Interfaces
 {
     public interface IClientRepository : IRepository<ClientRepository>
     {
-        //ApplicationUserManager UserManager { get; }
-        //ApplicationRoleManager RoleManager { get; }
         void Create(ClientProfile item);
         
         ApplicationUserManager UserManager();

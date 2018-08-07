@@ -13,7 +13,7 @@ namespace Freedi.Website.Controllers
         {
             _orderManager = orderManager;
             _goodsManager = goodsManager;
-           
+         
         }
 
         public ActionResult Index()

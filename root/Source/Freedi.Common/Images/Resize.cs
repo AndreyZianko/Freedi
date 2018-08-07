@@ -17,26 +17,26 @@ namespace Freedi.Common.Images
           
             foreach (var uploadfile in _uploadfile)
             {
-                WebImage img = new WebImage(uploadfile.InputStream);
-                img.Resize(250, 250);
+                //WebImage img = new WebImage(uploadfile.InputStream);
+                //img.Resize(250, 250);
          
-                string Pth = Path.Combine(@"..\Content\PhotoProduct\" + name.Trim() + Path.GetRandomFileName()
-                +"__" + "250x250" + Path.GetExtension(uploadfile.FileName)).Trim();
-                img.Save(Pth);
-                paths.Add(new PhotosViewModel
-                {
-                    PhotoPath = Pth
-                });
+                //string Pth = Path.Combine(@"..\Content\PhotoProduct\" + name.Trim() + Path.GetRandomFileName()
+                //+"__" + "250x250" + Path.GetExtension(uploadfile.FileName)).Trim();
+                //img.Save(Pth);
+                //paths.Add(new PhotosViewModel
+                //{
+                //    PhotoPath = Pth
+                //});
 
-                img.Resize(500, 500);
+                //img.Resize(500, 500);
           
-                string pth = Path.Combine(@"..\Content\PhotoProduct\" + name.Trim() + Path.GetRandomFileName() + "__" + "500x500" + Path.GetExtension(uploadfile.FileName)).Trim();
-                img.Save(pth);
+                //string pth = Path.Combine(@"..\Content\PhotoProduct\" + name.Trim() + Path.GetRandomFileName() + "__" + "500x500" + Path.GetExtension(uploadfile.FileName)).Trim();
+                //img.Save(pth);
 
-                paths.Add(new PhotosViewModel
-                {
-                    PhotoPath = pth
-                });
+                //paths.Add(new PhotosViewModel
+                //{
+                //    PhotoPath = pth
+                //});
 
             }
             return paths;

@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\ManagerModule.cs" />
-    <Compile Include="Interfaces\IGoodManager.cs" />
+    <Compile Include="Interfaces\IGoodsManager.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
     <Compile Include="Managers\UserManager.cs" />

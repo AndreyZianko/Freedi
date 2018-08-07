@@ -12,8 +12,8 @@ namespace Freedi.Logic.Interfaces
     {
         List<GoodsViewModel> GetGoods();
         GoodsViewModel GetGoodsById(int? Id);
-        bool GoodsUpdate(GoodsViewModel _goodsViewModel);
-        bool CreateProduct(GoodsViewModel _goodsViewModel);
-        bool DeleteProduct(int Id);
+        void GoodsUpdate(GoodsViewModel _goodsViewModel);
+        void CreateProduct(GoodsViewModel _goodsViewModel);
+        void  DeleteProduct(int Id);
     }
 }

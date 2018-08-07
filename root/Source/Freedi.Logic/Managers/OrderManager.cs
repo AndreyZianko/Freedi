@@ -10,17 +10,22 @@ namespace Freedi.Logic.Managers
 {
     public class OrderManager : IOrderManager
     {
-        IUnitOfWork _uow { get; set; }
+        private IUnitOfWork _uow { get; set; }
+        private IGoodRepository _goodRepository { get; set; }
+        private IOrderRepository _orderRepository{ get; set; }
 
-        public OrderManager(IUnitOfWork uow)
+        public OrderManager(IUnitOfWork uow, 
+            IGoodRepository goodRepository,
+            IOrderRepository orderRepository)
         {
             _uow = uow;
-            
+            _goodRepository = goodRepository;
+            _orderRepository = orderRepository;
         }
  
         public void MakeOrder(OrderViewModel orderView)
         {
-            var good = _uow.Goods.Get(orderView.GoodId);
+            var good = _goodRepository.Get(orderView.GoodId);
            
           
             var order = new Order
@@ -30,13 +35,13 @@ namespace Freedi.Logic.Managers
                 GoodId = good.Id,
                 PhoneNumber = orderView.PhoneNumber
             };
-            _uow.Orders.Create(order);
+            _orderRepository.Create(order);
             _uow.Save();
         }
 
         public IEnumerable<GoodsViewModel> GetGoods()
         {
-            var allgoods = _uow.Goods.GetAll();
+            var allgoods = _goodRepository.GetAll();
             var result = new List<GoodsViewModel>();
             foreach (var goods in allgoods)
             {
@@ -67,7 +72,7 @@ namespace Freedi.Logic.Managers
 
             if (id != null)
             {
-                var good = _uow.Goods.Get(id);
+                var good = _goodRepository.Get(id);
                 return new GoodsViewModel { Id = good.Id, Name = good.Name, Price = good.Price };
             }
             else

@@ -16,44 +16,43 @@ namespace Freedi.Logic.Managers
     public class GoodsManager : IGoodsManager
     {
         IUnitOfWork _uow { get; set; }
-       public GoodsManager(IUnitOfWork uow)
+        private IGoodRepository _goodRepository { get; set; }
+        private IOrderRepository _orderRepository { get; set; }
+        private IPhotosRepository _photosRepository { get; set; }
+        public GoodsManager(IUnitOfWork uow, IGoodRepository goodRepository,
+            IOrderRepository orderRepository, IPhotosRepository photosRepository)
         {
             _uow = uow;
+            _goodRepository = goodRepository;
+            _orderRepository = orderRepository;
+            _photosRepository = photosRepository;
 
         }
         public List<GoodsViewModel> GetGoods()
         {
-            var allgoods = _uow.Goods.GetAll();
-          
-            var result = new List<GoodsViewModel>();
-            
-            foreach (var goods in allgoods)
+            return _goodRepository.GetAll().Select(goods => new GoodsViewModel
             {
-                result.Add(new GoodsViewModel
-                {
-                    Id = goods.Id,
-                    Name = goods.Name,
-                    Price = goods.Price,
-                    Currency = goods.Currency,
-                    Sex = goods.Sex,
-                    StockQuantity = goods.StockQuantity,
-                    SKU = goods.SKU,
-                    Photo = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
-                    PhotoCount = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Count(),
-                    Description = goods.Description,
-                    Type = goods.Type,
-                    Unit = goods.Unit,
-                    Stock = goods.Stock
-                           
-                });
-                
-               
-            }
-            return result;
+                Id = goods.Id,
+                Name = goods.Name,
+                Price = goods.Price,
+                Currency = goods.Currency,
+                Sex = goods.Sex,
+                StockQuantity = goods.StockQuantity,
+                SKU = goods.SKU,
+                Photo = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
+                PhotoCount = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Count(),
+                Description = goods.Description,
+                Type = goods.Type,
+                Unit = goods.Unit,
+                Stock = goods.Stock
+
+            }).ToList();
+            
         }
+
         public GoodsViewModel GetGoodsById(int? Id)
         {
-            var _goods = _uow.Goods.Get(Id);
+            var _goods = _goodRepository.Get(Id);
             return (new GoodsViewModel
             {
                 Id = _goods.Id,
@@ -71,65 +70,69 @@ namespace Freedi.Logic.Managers
             });
         }
 
-        public bool GoodsUpdate(GoodsViewModel _goodsViewModel)
+        public void GoodsUpdate(GoodsViewModel goodsViewModel)
         {
             Photos _photos = new Photos();
-            var _product = _uow.Goods.Get(_goodsViewModel.Id);
-            _product.Name = _goodsViewModel.Name;
-            _product.Price = _goodsViewModel.Price;
-            _product.Sex = _goodsViewModel.Sex;
-            _product.SKU = _goodsViewModel.SKU;
-            _product.StockQuantity = _goodsViewModel.StockQuantity;
-            _product.Unit = _goodsViewModel.Unit;
-            _product.Type = _goodsViewModel.Type;
-            _product.Currency = _goodsViewModel.Currency;
-            _product.Description = _goodsViewModel.Description;
-            if (_goodsViewModel.Photo != null)
-                foreach (var _photo in _goodsViewModel.Photo)
+            var _product = _goodRepository.Get(goodsViewModel.Id);
+            _product.Name = goodsViewModel.Name;
+            _product.Price = goodsViewModel.Price;
+            _product.Sex = goodsViewModel.Sex;
+            _product.SKU = goodsViewModel.SKU;
+            _product.StockQuantity = goodsViewModel.StockQuantity;
+            _product.Unit = goodsViewModel.Unit;
+            _product.Type = goodsViewModel.Type;
+            _product.Currency = goodsViewModel.Currency;
+            _product.Description = goodsViewModel.Description;
+            if (goodsViewModel.Photo != null)
+                foreach (var _photo in goodsViewModel.Photo)
                 {
                     _photos.PhotoPath = _photo.PhotoPath;
                     _photos.GoodsId = _product.Id;
-                    _uow.Photos.Update(_photos);
+                    _photosRepository.Update(_photos);
                     _uow.Save();
                 }
-            _product.Stock = _goodsViewModel.Stock;
-            _uow.Goods.Update(_product);
+            _product.Stock = goodsViewModel.Stock;
+            _goodRepository.Update(_product);
             _uow.Save();
-            return true;
+         
         }
 
-        public bool CreateProduct(GoodsViewModel _goodsViewModel)
+        public void CreateProduct(GoodsViewModel goodsViewModel)
         {
-            Goods _product = new Goods();
-            Photos _photos = new Photos();
-            _product.Name = _goodsViewModel.Name;
-            _product.Price = _goodsViewModel.Price;
-            _product.Sex = _goodsViewModel.Sex;
-            _product.SKU = _goodsViewModel.SKU;
-            _product.StockQuantity = _goodsViewModel.StockQuantity;
-            _product.Unit = _goodsViewModel.Unit;
-            _product.Type = _goodsViewModel.Type;
-            _product.Currency = _goodsViewModel.Currency;
-            _product.Description = _goodsViewModel.Description;
-            _product.Stock = _goodsViewModel.Stock;
-            _uow.Goods.Create(_product);
+            Goods goods = new Goods();
+            Photos photos = new Photos();
+            FillEntityFromViewModel(goods, goodsViewModel, photos);
+            
+        }
+
+        private void FillEntityFromViewModel(Goods goods, GoodsViewModel goodsViewModel,Photos photos)
+        {
+            goods.Name = goodsViewModel.Name;
+            goods.Price = goodsViewModel.Price;
+            goods.Sex = goodsViewModel.Sex;
+            goods.SKU = goodsViewModel.SKU;
+            goods.StockQuantity = goodsViewModel.StockQuantity;
+            goods.Unit = goodsViewModel.Unit;
+            goods.Type = goodsViewModel.Type;
+            goods.Currency = goodsViewModel.Currency;
+            goods.Description = goodsViewModel.Description;
+            goods.Stock = goodsViewModel.Stock;
+            _goodRepository.Create(goods);
             _uow.Save();
-            if (_goodsViewModel.Photo != null)
-                foreach (var _photo in _goodsViewModel.Photo)
+            if (goodsViewModel.Photo != null)
+                foreach (var _photo in goodsViewModel.Photo)
                 {
-                    _photos.PhotoPath = _photo.PhotoPath;
-                    _photos.GoodsId = _product.Id;
-                    _uow.Photos.Create(_photos);
+                    photos.PhotoPath = _photo.PhotoPath;
+                    photos.GoodsId = goods.Id;
+                    _photosRepository.Create(photos);
                     _uow.Save();
                 }
-       
-            return true;
         }
 
-        public bool DeleteProduct(int Id)
+        public void DeleteProduct(int Id)
         {
-            if(_uow.Goods.Get(Id).Photos.Count>0)
-            foreach (var item in _uow.Goods.Get(Id).Photos.Select(x => x.PhotoPath))
+            if(_goodRepository.Get(Id).Photos.Count>0)
+            foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
             {
                     var fullpath = HostingEnvironment.MapPath(item.Replace("..", "~"));
                     FileInfo fileInf = new FileInfo(fullpath);
@@ -137,20 +140,12 @@ namespace Freedi.Logic.Managers
                     {
                         fileInf.Delete();  
                     }
-                 
             }
-
-            if (_uow.Goods.Delete(Id))
-            {
-                _uow.Save();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            _goodRepository.Delete(Id);
+            _uow.Save();
 
         }
 
+       
     }
 }

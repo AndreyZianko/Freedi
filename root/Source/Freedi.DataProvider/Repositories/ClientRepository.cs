@@ -13,8 +13,6 @@ namespace Freedi.DataProvider.Repositories
     public class ClientRepository : BaseRepository<ClientRepository>,IClientRepository
     {
         private FreediContext _context;
-        //public ApplicationUserManager UserManager { get; }
-        //public ApplicationRoleManager RoleManager { get; }
 
         public ClientRepository(FreediContext context) : base(context)
         {
