@@ -19,7 +19,7 @@ namespace Freedi.Model.ViewModels
         public string SKU { get; set; }
         public List<PhotosViewModel> Photo { get; set; }
         public int PhotoCount { get; set; }
-        //[FileType("JPG,JPEG,PNG")]
+        [FileType("JPG,JPEG,PNG")]
         public List<HttpPostedFileBase> UploadedFile { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
