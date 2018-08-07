@@ -8,9 +8,8 @@ namespace Freedi.Common.Images
 
     public static class Resize
     {
-        public static string ResizeImg(this HttpPostedFileBase _uploadfile, string name)
+        public static string ResizeImg(this HttpPostedFileBase[] _uploadfile, string name)
         {
-            
             //Directory.CreateDirectory(@"..\Content\PhotoProduct\" + name);
             string Pth = Path.Combine(@"..\Content\PhotoProduct\" + name + Path.GetExtension(_uploadfile.FileName)).Trim();
             WebImage img = new WebImage(_uploadfile.InputStream);

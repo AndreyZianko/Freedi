@@ -16,7 +16,7 @@ namespace Freedi.Model.ViewModels
         public bool Stock { get; set; }
         public string SKU { get; set; }
         public string Photo { get; set; }
-        public HttpPostedFileBase UploadedFile { get; set; }
+        public HttpPostedFileBase[] UploadedFile { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
     }
