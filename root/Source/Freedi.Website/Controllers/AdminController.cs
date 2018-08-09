@@ -15,11 +15,13 @@ namespace Freedi.Website.Controllers
     {
         IOrderManager _orderManager;
         IGoodsManager _goodsManager;
-        public AdminController(IOrderManager orderManager, IGoodsManager goodsManager)
+        IPhotoManager _photoManager;
+        public AdminController(IOrderManager orderManager, IGoodsManager goodsManager , IPhotoManager photoManager)
         {
 
             _orderManager = orderManager;
             _goodsManager = goodsManager;
+            _photoManager = photoManager;
 
         }
         public ActionResult Admin()
@@ -45,40 +47,35 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return PartialView("CreateProductPartialVIew", _goodsViewModel);
-            }
-          
-            if (_goodsViewModel.UploadedFile[0]!=null)
-            {
-                foreach (var file in _goodsViewModel.UploadedFile)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
+            //if (!ModelState.IsValid)
+            //{
+            //    return PartialView("CreateProductPartialVIew", _goodsViewModel);
+            //}
 
-                    }
-                }
-                
-            }
+            //if (_goodsViewModel.UploadedFile[0]!=null)
+            //{
+            //    foreach (var file in _goodsViewModel.UploadedFile)
+            //    {
+            //        if (file != null && file.ContentLength > 0)
+            //        {
+            //            _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
 
-            if (_goodsManager.CreateProduct(_goodsViewModel))
-            { 
+            //        }
+            //    }
+
+            //}
+
+            _goodsViewModel.Photo = _photoManager.UploadPhoto(_goodsViewModel.UploadedFile, _goodsViewModel.Name);
+            _goodsManager.CreateProduct(_goodsViewModel);
                 return Content("Success");
-            }
-
-            return Content("error");
         }
 
 
         [HttpPost]
         public ActionResult Catalog(GoodsViewModel goods)
         {
-            if(_goodsManager.GoodsUpdate(goods) )
+                 _goodsManager.GoodsUpdate(goods);
                 return View("SuccessPartialView");
-
-            return View("Admin");
         }
         
         public ActionResult DeleteProduct(int? Id)

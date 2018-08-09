@@ -91,7 +91,9 @@
     <Compile Include="Infrastructure\ManagerModule.cs" />
     <Compile Include="Interfaces\IGoodsManager.cs" />
     <Compile Include="Interfaces\IOrderManager.cs" />
+    <Compile Include="Interfaces\IPhotoManager.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
+    <Compile Include="Managers\PhotoManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\GoodsManager.cs" />
     <Compile Include="Managers\OrderManager.cs" />

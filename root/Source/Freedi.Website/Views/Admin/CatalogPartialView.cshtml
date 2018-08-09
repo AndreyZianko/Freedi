@@ -136,7 +136,8 @@
                     @Html.DisplayFor(modelItem => item.SKU)
                 </td>
                 <td>
-                    <img id="@item.Photo.Select(x=>x.PhotoId).FirstOrDefault()"src="@item.Photo.Select(x=>x.PhotoPath).FirstOrDefault()" />
+                   
+                    <img id="@item.Photo.Select(x=>x.PhotoId).FirstOrDefault()"src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ??"~/PathToDefaultImage")" />
             
                 </td>
                 <td>

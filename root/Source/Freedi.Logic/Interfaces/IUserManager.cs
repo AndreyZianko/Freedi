@@ -11,8 +11,8 @@ namespace Freedi.Logic.Interfaces
     public interface IUserManager
     {
 
-        Task<OperationDetails> Create(UserViewModel userDto);
-        Task<ClaimsIdentity> Authenticate(UserViewModel userDto);
-        Task SetInitialData(UserViewModel adminDto, List<string> roles);
+        Task<OperationDetails> Create(UserViewModel userViewModel);
+        Task<ClaimsIdentity> Authenticate(UserViewModel userViewModel);
+        Task SetInitialData(UserViewModel adminViewModel, List<string> roles);
     } 
 }

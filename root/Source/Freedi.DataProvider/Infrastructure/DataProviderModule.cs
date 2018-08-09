@@ -14,7 +14,7 @@ namespace Freedi.DataProvider.Infrastructure
         
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<FreediContext>().AsSelf();
+            builder.RegisterType<FreediContext>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<GoodRepository>().As<IGoodRepository>().InstancePerRequest();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerRequest();

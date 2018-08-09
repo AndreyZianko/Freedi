@@ -14,5 +14,10 @@ namespace Freedi.DataProvider.Repositories
             _context = context;
            
         }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
     }
 }

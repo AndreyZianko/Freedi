@@ -240,7 +240,6 @@
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Content\img\bootstrap-imageupload.css" />
     <Content Include="Content\img\loading-white-d.gif" />
-    <Content Include="Content\PhotoProduct\1.png" />
     <Content Include="Content\TemplateImages\banner_1.jpg" />
     <Content Include="Content\TemplateImages\banner_2.jpg" />
     <Content Include="Content\TemplateImages\banner_3.jpg" />
@@ -405,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\PhotoProduct\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -15,7 +15,7 @@ namespace Freedi.Logic.Managers
 {
     public class GoodsManager : IGoodsManager
     {
-        IUnitOfWork _uow { get; set; }
+        private IUnitOfWork _uow { get; set; }
         private IGoodRepository _goodRepository { get; set; }
         private IOrderRepository _orderRepository { get; set; }
         private IPhotosRepository _photosRepository { get; set; }
@@ -39,7 +39,7 @@ namespace Freedi.Logic.Managers
                 Sex = goods.Sex,
                 StockQuantity = goods.StockQuantity,
                 SKU = goods.SKU,
-                Photo = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
+                Photo = goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
                 PhotoCount = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Count(),
                 Description = goods.Description,
                 Type = goods.Type,
@@ -102,10 +102,33 @@ namespace Freedi.Logic.Managers
             Goods goods = new Goods();
             Photos photos = new Photos();
             FillEntityFromViewModel(goods, goodsViewModel, photos);
-            
+          
         }
 
-        private void FillEntityFromViewModel(Goods goods, GoodsViewModel goodsViewModel,Photos photos)
+
+        public void DeleteProduct(int Id)
+        {
+            if(_goodRepository.Get(Id).Photos.Count>0)
+            foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
+            {
+                    var fullpath = HostingEnvironment.MapPath(item.Replace("..", "~"));
+                    FileInfo fileInf = new FileInfo(fullpath);
+                    if (fileInf.Exists)
+                    {
+                        fileInf.Delete();  
+                    }
+            }
+            _goodRepository.Delete(Id);
+            _uow.Save();
+
+        }
+
+
+
+
+
+
+        private void FillEntityFromViewModel(Goods goods, GoodsViewModel goodsViewModel, Photos photos)
         {
             goods.Name = goodsViewModel.Name;
             goods.Price = goodsViewModel.Price;
@@ -128,24 +151,5 @@ namespace Freedi.Logic.Managers
                     _uow.Save();
                 }
         }
-
-        public void DeleteProduct(int Id)
-        {
-            if(_goodRepository.Get(Id).Photos.Count>0)
-            foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
-            {
-                    var fullpath = HostingEnvironment.MapPath(item.Replace("..", "~"));
-                    FileInfo fileInf = new FileInfo(fullpath);
-                    if (fileInf.Exists)
-                    {
-                        fileInf.Delete();  
-                    }
-            }
-            _goodRepository.Delete(Id);
-            _uow.Save();
-
-        }
-
-       
     }
 }

@@ -18,6 +18,7 @@ namespace Freedi.Logic.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UserManager>().As<IUserManager>().InstancePerRequest();
+            builder.RegisterType<PhotoManager>().As<IPhotoManager>().InstancePerRequest();
         }
 
       

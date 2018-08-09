@@ -5,6 +5,7 @@ namespace Freedi.DataProvider.Interfaces
 {
      public interface IGoodRepository : IRepository<Goods>
     {
-       
+
+        void Save();
     }
 }
