@@ -23,6 +23,10 @@ namespace Freedi.DataProvider.Models
         public string Sex { get; set; }
         public virtual ICollection<Photos> Photos { get; set; }
 
+        public Goods()
+        {
+            Photos = new List<Photos>();
+        }
     }
 
 }

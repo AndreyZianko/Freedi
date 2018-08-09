@@ -40,7 +40,7 @@ namespace Freedi.Logic.Managers
                 StockQuantity = goods.StockQuantity,
                 SKU = goods.SKU,
                 Photo = goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
-                PhotoCount = goods.Photos.Where(x => x.PhotoPath.Contains("250x250")).Count(),
+                PhotoCount = goods.Photos.Count(),
                 Description = goods.Description,
                 Type = goods.Type,
                 Unit = goods.Unit,
@@ -60,7 +60,8 @@ namespace Freedi.Logic.Managers
                 Price = _goods.Price,
                 Currency = _goods.Currency,
                 Sex = _goods.Sex,
-                Photo = _goods.Photos.Where(x=>x.PhotoPath.Contains("250x250")).Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
+                Photo = _goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
+                PhotoCount = _goods.Photos.Count,
                 StockQuantity = _goods.StockQuantity,
                 SKU = _goods.SKU,
                 Description = _goods.Description,
@@ -102,7 +103,8 @@ namespace Freedi.Logic.Managers
             Goods goods = new Goods();
             Photos photos = new Photos();
             FillEntityFromViewModel(goods, goodsViewModel, photos);
-          
+            _goodRepository.Create(goods);
+            _uow.Save();
         }
 
 
@@ -140,16 +142,14 @@ namespace Freedi.Logic.Managers
             goods.Currency = goodsViewModel.Currency;
             goods.Description = goodsViewModel.Description;
             goods.Stock = goodsViewModel.Stock;
-            _goodRepository.Create(goods);
-            _uow.Save();
-            if (goodsViewModel.Photo != null)
-                foreach (var _photo in goodsViewModel.Photo)
-                {
-                    photos.PhotoPath = _photo.PhotoPath;
-                    photos.GoodsId = goods.Id;
-                    _photosRepository.Create(photos);
-                    _uow.Save();
-                }
+
+            foreach (var photo in goodsViewModel.Photo)
+            {
+                goods.Photos.Add(new Photos { PhotoPath = photo.PhotoPath });
+            }
+        
+            
+
         }
     }
 }

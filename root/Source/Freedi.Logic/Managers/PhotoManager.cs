@@ -46,11 +46,13 @@ namespace Freedi.Logic.Managers
                 var goodsPhotoName = name + Path.GetExtension(_uploadfile.Select(x => x.FileName).FirstOrDefault());
                 var phisicalPathToDirectory = HostingEnvironment.MapPath(goodsDirectory);
                 if (!string.IsNullOrEmpty(phisicalPathToDirectory))
+                {
                     Directory.CreateDirectory(phisicalPathToDirectory);
-                _uploadfile[0].SaveAs(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
-                _photo.PhotoPath = Path.Combine(goodsDirectory, goodsPhotoName);
-                _photos.Add(_photo);
-                return _photos;
+                    _uploadfile[0].SaveAs(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
+                    _photo.PhotoPath = Path.Combine(goodsDirectory, goodsPhotoName);
+                    _photos.Add(_photo);
+                    return _photos;
+                }
 
             }
             throw new Exception("");

@@ -67,7 +67,8 @@ namespace Freedi.Website.Controllers
 
             _goodsViewModel.Photo = _photoManager.UploadPhoto(_goodsViewModel.UploadedFile, _goodsViewModel.Name);
             _goodsManager.CreateProduct(_goodsViewModel);
-                return Content("Success");
+              return PartialView("CreateProductPartialVIew");
+
         }
 
 
