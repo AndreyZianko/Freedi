@@ -1,8 +1,7 @@
 ﻿$(document).ready(function () {
-    var options = {};
-   
-    $('.js-uploader__box').uploader(options);
 
+   
+   
     var options = {
     submitButtonCopy: 'Upload Selected Files',
     instructionsCopy: 'Drag and Drop, or',
@@ -15,5 +14,6 @@
     testMode: false
 
     };
+    $('.js-uploader__box').uploader(options);
 
-});
+}); 
