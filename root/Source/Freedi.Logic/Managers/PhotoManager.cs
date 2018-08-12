@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Hosting;
 
 namespace Freedi.Logic.Managers
@@ -37,6 +38,8 @@ namespace Freedi.Logic.Managers
 
         public List<PhotosViewModel> UploadPhoto(List<HttpPostedFileBase> _uploadfile, string name)
         {
+        
+          
             var imageDirectory = @"~/Content/PhotoProduct";
             List<PhotosViewModel> _photos = new List<PhotosViewModel>();
             PhotosViewModel _photo = new PhotosViewModel();
@@ -48,7 +51,9 @@ namespace Freedi.Logic.Managers
                 if (!string.IsNullOrEmpty(phisicalPathToDirectory))
                 {
                     Directory.CreateDirectory(phisicalPathToDirectory);
-                    _uploadfile[0].SaveAs(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
+                    WebImage img = new WebImage(_uploadfile[0].InputStream);
+                    img.Resize(250, 250);
+                    img.Save(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
                     _photo.PhotoPath = Path.Combine(goodsDirectory, goodsPhotoName);
                     _photos.Add(_photo);
                     return _photos;
@@ -58,6 +63,10 @@ namespace Freedi.Logic.Managers
             throw new Exception("");
         }
 
+        public void Resize (HttpPostedFileBase uploadfile)
+        {
+          
+        }
         public void DeletePhoto(int Id)
         {
             throw new NotImplementedException();

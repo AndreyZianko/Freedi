@@ -15,17 +15,17 @@
                 type: "POST",
                 url: action,
                 data: dataString,
-                dataType: "json", //change to your own, else read my note above on enabling the JsonValueProviderFactory in MVC
+               //  dataType: "json", change to your own, else read my note above on enabling the JsonValueProviderFactory in MVC
                 contentType: contentType,
                 processData: processData,
                 async: false,
                 success: function (data) {
-                    var k = data;
+                    alert(data);
                     debugger;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 
-                    alert("fail");
+                    
                 }
             });
         }); //end .submit()

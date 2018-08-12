@@ -12,6 +12,7 @@
     dropZone: $(this),
     fileTypeWhiteList: ['jpg', 'png', 'jpeg', 'gif'],
     badFileTypeMessage: 'Sorry, we\'re unable to accept this type of file.',
+    ajaxUrl: '/CreateProduct/CreateProduct',
     testMode: false
 
     };

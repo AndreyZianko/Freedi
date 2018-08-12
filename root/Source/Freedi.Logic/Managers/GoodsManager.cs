@@ -73,36 +73,38 @@ namespace Freedi.Logic.Managers
 
         public void GoodsUpdate(GoodsViewModel goodsViewModel)
         {
-            Photos _photos = new Photos();
-            var _product = _goodRepository.Get(goodsViewModel.Id);
-            _product.Name = goodsViewModel.Name;
-            _product.Price = goodsViewModel.Price;
-            _product.Sex = goodsViewModel.Sex;
-            _product.SKU = goodsViewModel.SKU;
-            _product.StockQuantity = goodsViewModel.StockQuantity;
-            _product.Unit = goodsViewModel.Unit;
-            _product.Type = goodsViewModel.Type;
-            _product.Currency = goodsViewModel.Currency;
-            _product.Description = goodsViewModel.Description;
-            if (goodsViewModel.Photo != null)
-                foreach (var _photo in goodsViewModel.Photo)
-                {
-                    _photos.PhotoPath = _photo.PhotoPath;
-                    _photos.GoodsId = _product.Id;
-                    _photosRepository.Update(_photos);
-                    _uow.Save();
-                }
-            _product.Stock = goodsViewModel.Stock;
-            _goodRepository.Update(_product);
+            Goods goods = _goodRepository.Get(goodsViewModel.Id);
+            fillGoodModelForUpdate(goods, goodsViewModel);
+            _goodRepository.Update(goods);
             _uow.Save();
          
         }
 
+       private void fillGoodModelForUpdate(Goods goods  ,GoodsViewModel goodsViewModel)
+        {
+            goods.Name = goodsViewModel.Name;
+            goods.Price = goodsViewModel.Price;
+            goods.Sex = goodsViewModel.Sex;
+            goods.SKU = goodsViewModel.SKU;
+            goods.StockQuantity = goodsViewModel.StockQuantity;
+            goods.Unit = goodsViewModel.Unit;
+            goods.Type = goodsViewModel.Type;
+            goods.Currency = goodsViewModel.Currency;
+            goods.Description = goodsViewModel.Description;
+            goods.Stock = goodsViewModel.Stock;
+            foreach (var photo in goodsViewModel.Photo)
+            {
+                goods.Photos.Add(new Photos { PhotoPath = photo.PhotoPath });
+            }
+           
+        }
+
+
+
         public void CreateProduct(GoodsViewModel goodsViewModel)
         {
             Goods goods = new Goods();
-            Photos photos = new Photos();
-            FillEntityFromViewModel(goods, goodsViewModel, photos);
+            FillEntityFromViewModel(goods, goodsViewModel);
             _goodRepository.Create(goods);
             _uow.Save();
         }
@@ -110,27 +112,37 @@ namespace Freedi.Logic.Managers
 
         public void DeleteProduct(int Id)
         {
-            if(_goodRepository.Get(Id).Photos.Count>0)
-            foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
-            {
-                    var fullpath = HostingEnvironment.MapPath(item.Replace("..", "~"));
-                    FileInfo fileInf = new FileInfo(fullpath);
-                    if (fileInf.Exists)
-                    {
-                        fileInf.Delete();  
-                    }
-            }
+
+             deletePhotoFromProjectByPath(Id);
             _goodRepository.Delete(Id);
             _uow.Save();
 
         }
 
 
+        private void deletePhotoFromProjectByPath(int Id)
+        {
+            if (_goodRepository.Get(Id).Photos.Count > 0)
+                foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
+                {
+                    var fullpath = HostingEnvironment.MapPath(item);
+                    FileInfo fileInf = new FileInfo(fullpath);
+                    if (fileInf.Exists)
+                    {
+                        fileInf.Delete();
+                        var folder = new DirectoryInfo(Path.GetDirectoryName(fullpath));
+                        if (!folder.Exists)
+                        {
+                            Directory.Delete(Path.GetDirectoryName(fullpath), true);
+                        }          
+                    }
+                 
+                }
+        }
 
 
 
-
-        private void FillEntityFromViewModel(Goods goods, GoodsViewModel goodsViewModel, Photos photos)
+        private void FillEntityFromViewModel(Goods goods, GoodsViewModel goodsViewModel)
         {
             goods.Name = goodsViewModel.Name;
             goods.Price = goodsViewModel.Price;

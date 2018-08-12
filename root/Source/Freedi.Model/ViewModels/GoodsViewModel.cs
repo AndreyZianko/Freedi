@@ -28,6 +28,7 @@ namespace Freedi.Model.ViewModels
         public int PhotoCount { get; set; }
         [FileType("JPG,JPEG,PNG")]
         public List<HttpPostedFileBase> UploadedFile { get; set; }
+        public HttpPostedFileBase UploadedFile1 { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
