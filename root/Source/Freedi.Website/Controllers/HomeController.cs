@@ -20,7 +20,21 @@ namespace Freedi.Website.Controllers
         {
             return View();
         }
-
+        public ActionResult Catalog()
+        {
+            return View(_goodsManager.GetGoods());
+        }
+        [Authorize]
+        public ActionResult SingleProduct(int? Id)
+        {
+            if(Id != null)
+            { 
+                var product = _goodsManager.GetGoodsById(Id);
+                return View(product);
+            }
+            return View();
+        }
+     
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

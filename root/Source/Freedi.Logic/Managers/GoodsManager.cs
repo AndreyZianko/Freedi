@@ -38,12 +38,10 @@ namespace Freedi.Logic.Managers
                 Currency = goods.Currency,
                 Sex = goods.Sex,
                 StockQuantity = goods.StockQuantity,
-                SKU = goods.SKU,
                 Photo = goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
                 PhotoCount = goods.Photos.Count(),
                 Description = goods.Description,
                 Type = goods.Type,
-                Unit = goods.Unit,
                 Stock = goods.Stock
 
             }).ToList();
@@ -63,10 +61,8 @@ namespace Freedi.Logic.Managers
                 Photo = _goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath }).ToList(),
                 PhotoCount = _goods.Photos.Count,
                 StockQuantity = _goods.StockQuantity,
-                SKU = _goods.SKU,
                 Description = _goods.Description,
                 Type = _goods.Type,
-                Unit = _goods.Unit,
                 Stock = _goods.Stock
             });
         }
@@ -74,29 +70,30 @@ namespace Freedi.Logic.Managers
         public void GoodsUpdate(GoodsViewModel goodsViewModel)
         {
             Goods goods = _goodRepository.Get(goodsViewModel.Id);
+            
             fillGoodModelForUpdate(goods, goodsViewModel);
             _goodRepository.Update(goods);
             _uow.Save();
          
         }
 
-       private void fillGoodModelForUpdate(Goods goods  ,GoodsViewModel goodsViewModel)
+       private void fillGoodModelForUpdate(Goods goods, GoodsViewModel goodsViewModel)
         {
             goods.Name = goodsViewModel.Name;
             goods.Price = goodsViewModel.Price;
             goods.Sex = goodsViewModel.Sex;
-            goods.SKU = goodsViewModel.SKU;
             goods.StockQuantity = goodsViewModel.StockQuantity;
-            goods.Unit = goodsViewModel.Unit;
             goods.Type = goodsViewModel.Type;
             goods.Currency = goodsViewModel.Currency;
             goods.Description = goodsViewModel.Description;
             goods.Stock = goodsViewModel.Stock;
+
             foreach (var photo in goodsViewModel.Photo)
             {
+                if(photo.PhotoPath!=null)
                 goods.Photos.Add(new Photos { PhotoPath = photo.PhotoPath });
             }
-           
+
         }
 
 
@@ -113,31 +110,37 @@ namespace Freedi.Logic.Managers
         public void DeleteProduct(int Id)
         {
 
-             deletePhotoFromProjectByPath(Id);
+            DeletePhotoFromProjectByPath(Id);
             _goodRepository.Delete(Id);
             _uow.Save();
 
         }
 
 
-        private void deletePhotoFromProjectByPath(int Id)
+        public void DeletePhotoFromProjectByPath(int Id)
         {
+            
             if (_goodRepository.Get(Id).Photos.Count > 0)
-                foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath))
+            { 
+                foreach (var item in _goodRepository.Get(Id).Photos.Select(x => x.PhotoPath).ToList())
                 {
                     var fullpath = HostingEnvironment.MapPath(item);
                     FileInfo fileInf = new FileInfo(fullpath);
                     if (fileInf.Exists)
                     {
+
+                   
                         fileInf.Delete();
+                        fileInf.Refresh();
                         var folder = new DirectoryInfo(Path.GetDirectoryName(fullpath));
-                        if (!folder.Exists)
+                        if (folder.Exists && !fileInf.Exists)
                         {
                             Directory.Delete(Path.GetDirectoryName(fullpath), true);
                         }          
                     }
                  
                 }
+            }
         }
 
 
@@ -147,9 +150,7 @@ namespace Freedi.Logic.Managers
             goods.Name = goodsViewModel.Name;
             goods.Price = goodsViewModel.Price;
             goods.Sex = goodsViewModel.Sex;
-            goods.SKU = goodsViewModel.SKU;
             goods.StockQuantity = goodsViewModel.StockQuantity;
-            goods.Unit = goodsViewModel.Unit;
             goods.Type = goodsViewModel.Type;
             goods.Currency = goodsViewModel.Currency;
             goods.Description = goodsViewModel.Description;

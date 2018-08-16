@@ -1,52 +1,56 @@
-﻿
-
-@{
+﻿@{
     Layout = null;
 }
 @model Freedi.Model.ViewModels.GoodsViewModel
 <link href="~/Content/img/bootstrap-imageupload.css" rel="stylesheet" />
 <link href="~/Scripts/MyScripts/styles.imageuploader.css" rel="stylesheet" />
-@*<script>
-    $(function () {
-        $("#Create").on('click', function (event) {
 
-            var dataString;
+<script>
+
+    $(document).ajaxComplete(function () {
+
+    
+
+        $('form').each(function () {
             debugger;
-            event.preventDefault();
-            //event.stopPropagation();
-            var action = $("#CreateForm").attr("action");
-            if ($("#CreateForm").attr("enctype") == "multipart/form-data") {
-                dataString = new FormData($("#CreateForm").get(0));
-                contentType = false;
-                processData = false;
-            } else {
-                // regular form, do your own thing if you need it
-            }
+            var $el = $(this);
+            $el.data('validator', null);
+            $.validator.unobtrusive.parse($el);
+
+          
+        })
+    });
+    $("#CreateForm").on('submit', function (event) {
+        event.preventDefault();
+        debugger;
+        if ($(this).valid()) {
+            var formdata = new FormData($(this).get(0));
+            
             $.ajax({
-                type: "POST",
-                url: action,
-                data: dataString,
-                dataType: "json", //change to your own, else read my note above on enabling the JsonValueProviderFactory in MVC
-                contentType: contentType,
-                processData: processData,
-                async: false,
-                success: function (data) {
-                    var k = data;
+                url: this.action,
+                type: this.method,
+                data: formdata,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    // Doing some loading gif stuff
+                },
+                success: function (result) {
+                    // element is div holding the ParticalView
+                    $("#productList").html(result);
                     debugger;
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
-
-                    alert("fail");
+                complete: function () {
+                    $.validator.unobtrusive.parse('form');
+                    // And so on.
                 }
             });
-        }); //end .submit()
-    });
-</script>*@
+        }
+       
+    })
+</script>
 
-
-
-
-@using (Ajax.BeginForm("CreateProduct", "Admin", new AjaxOptions { UpdateTargetId = "productList" }, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", data_target = "#myModal", id = "CreateForm" }))
+@using (Html.BeginForm("CreateProduct", "Admin",FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", data_target = "#myModal", id = "CreateForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -76,13 +80,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
-            </div>
-        </div>
+ 
 
         <div class="form-group">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -109,16 +107,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SKU, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -137,55 +125,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-               @Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
-
-                <div class="uploader__box js-uploader__box l-center-box">
-                    <div class="uploader__contents">
-                        <label class="button button--secondary" for="fileinput">Select Files</label>
-                        <input id="fileinput" class="uploader__file-input" name="UploadedFile1" type="file" multiple value="Select Files">
-                    </div>
-                    
-
-                @*@Html.TextBoxFor(m => m.UploadedFile, new { type = "file", multiple = "multiple", @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.UploadedFile, "", new { @class = "text-danger" })*@
+            
+            @Html.TextBoxFor(m => m.UploadedFile, new { type = "file", multiple = "multiple", @class = "form-control", Id="file-upload" })
+            @Html.ValidationMessageFor(m => m.UploadedFile, "", new { @class = "text-danger" })
             </div>
 
         </div>
             </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @*<input type="button" id="Create" value="Create" class="btn btn-default" />*@
-                <input class="button button--big-bottom" type="submit" value="Create">
+                <input type="submit" id="Create" value="Create" class="btn btn-default" />
+  
             </div>
         </div>
-    </div>
+
 
 }
-<script src="~/Scripts/MyScripts/jquery.imageuploader.js"></script>
-    @*<script src="~/Scripts/MyScripts/FreediJS.js"></script>*@
 
-<script>
-
-    var options = {};
-
-    var options = {
-        submitButtonCopy: 'Upload Selected Files',
-        instructionsCopy: 'Drag and Drop, or',
-        furtherInstructionsCopy: 'Your can also drop more files, or',
-        selectButtonCopy: 'Select Files',
-        secondarySelectButtonCopy: 'Select More Files',
-        dropZone: $(this),
-        fileTypeWhiteList: ['jpg', 'png', 'jpeg', 'gif'],
-        badFileTypeMessage: 'Sorry, we\'re unable to accept this type of file.',
-        ajaxUrl: '/Admin/CreateProduct',
-        testMode: false
-
-    };
-
-    $('.js-uploader__box').uploader(options);
-
-
-</script>
 
 

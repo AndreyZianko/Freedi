@@ -1,4 +1,5 @@
-﻿using Freedi.DataProvider.Interfaces;
+﻿using Freedi.DataProvider.Entites;
+using Freedi.DataProvider.Interfaces;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using System;
@@ -18,12 +19,14 @@ namespace Freedi.Logic.Managers
 
         private IPhotosRepository _photosRepository {get;set;}
         private IGoodRepository _goodRepository { get; set; }
-        public PhotoManager(IPhotosRepository photosRepository, IGoodRepository goodRepository)
+        private IGoodsManager _goodsManager { get; set; }
+        private IUnitOfWork _uow { get; set; }
+        public PhotoManager(IPhotosRepository photosRepository, IGoodRepository goodRepository, IGoodsManager goodsManager,IUnitOfWork uow)
         {
             _photosRepository = photosRepository;
             _goodRepository = goodRepository;
-
-
+            _goodsManager = goodsManager;
+            _uow = uow;
         }
 
         public List<string> GetPhotos(int IdGoods)
@@ -31,46 +34,81 @@ namespace Freedi.Logic.Managers
             throw new NotImplementedException();
         }
 
-        public void UpdatePhoto(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
+    
         public List<PhotosViewModel> UploadPhoto(List<HttpPostedFileBase> _uploadfile, string name)
         {
-        
-          
             var imageDirectory = @"~/Content/PhotoProduct";
             List<PhotosViewModel> _photos = new List<PhotosViewModel>();
-            PhotosViewModel _photo = new PhotosViewModel();
-            if(!string.IsNullOrEmpty(imageDirectory))
             {
-                var goodsDirectory = Path.Combine(imageDirectory, name);
-                var goodsPhotoName = name + Path.GetExtension(_uploadfile.Select(x => x.FileName).FirstOrDefault());
-                var phisicalPathToDirectory = HostingEnvironment.MapPath(goodsDirectory);
-                if (!string.IsNullOrEmpty(phisicalPathToDirectory))
+                foreach (var photo in _uploadfile)
                 {
-                    Directory.CreateDirectory(phisicalPathToDirectory);
-                    WebImage img = new WebImage(_uploadfile[0].InputStream);
-                    img.Resize(250, 250);
-                    img.Save(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
-                    _photo.PhotoPath = Path.Combine(goodsDirectory, goodsPhotoName);
-                    _photos.Add(_photo);
-                    return _photos;
+
+                    var goodsDirectory = Path.Combine(imageDirectory, name.Trim());
+                    var goodsPhotoName = name.Trim() + Path.GetRandomFileName()+Path.GetExtension(photo.FileName);
+                    var phisicalPathToDirectory = HostingEnvironment.MapPath(goodsDirectory);
+                    var folder = new DirectoryInfo(phisicalPathToDirectory);
+                    if (!string.IsNullOrEmpty(phisicalPathToDirectory))
+                    {
+                      
+                        if(!folder.Exists)
+                        Directory.CreateDirectory(phisicalPathToDirectory);
+                        WebImage img = new WebImage(photo.InputStream);
+                        img.Resize(250, 250);
+                        img.Save(Path.Combine(phisicalPathToDirectory, goodsPhotoName));
+                        PhotosViewModel _photo = new PhotosViewModel(){
+                         PhotoPath = Path.Combine(goodsDirectory, goodsPhotoName)};
+                        _photos.Add(_photo);
+                   
+                    }
+                }
+                return _photos;
+            }
+            throw new Exception("");
+        }
+
+
+
+        public void UpdatePhoto(GoodsViewModel goods)
+        {
+            foreach (var photo in goods.Photo)
+            {
+                if (photo.PhotoChange)
+                {
+
+                    DeletePhotoFromProjectByPhotoId(photo.PhotoId);
+                    DeletePhotoByPhotoId(photo.PhotoId);
                 }
 
             }
-            throw new Exception("");
+            if (goods.UploadedFile.Count > 0)
+                goods.Photo = UploadPhoto(goods.UploadedFile, goods.Name);
         }
 
         public void Resize (HttpPostedFileBase uploadfile)
         {
           
         }
-        public void DeletePhoto(int Id)
+        public void DeletePhotoByPhotoId(int PhotoId)
         {
-            throw new NotImplementedException();
+            _photosRepository.Delete(PhotoId);
+            _uow.Save();
         }
+        public void DeletePhotoFromProjectByPhotoId(int PhotoId )
+        {
+            var pathbyid = _photosRepository.Get(PhotoId);
+            var fullpath = HostingEnvironment.MapPath(pathbyid.PhotoPath);
+            FileInfo fileInf = new FileInfo(fullpath);
+            if (fileInf.Exists)
+            {
+                fileInf.Delete();
+                fileInf.Refresh();
+                var folder = new DirectoryInfo(Path.GetDirectoryName(fullpath));
+                if (folder.Exists && !fileInf.Exists)
+                {
+                    Directory.Delete(Path.GetDirectoryName(fullpath), true);
+                }
+            }
 
+        }
     }
 }

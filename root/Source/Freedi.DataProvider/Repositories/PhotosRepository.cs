@@ -16,6 +16,17 @@ namespace Freedi.DataProvider.Repositories
             _context = context;
         }
 
+        public void DeletePhotoByGoodsId(int id)
+        {
+            
+            foreach (var item in _context.Photos.Where(x => x.GoodsId == id).ToList())
+            {
+                _context.Photos.Remove(item);
+                _context.SaveChanges();
+            }
+          
+          
+        }
      
     }
 }

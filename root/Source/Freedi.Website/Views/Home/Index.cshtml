@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Colo Shop Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/TemplateStyles/main_styles.css">
 
 
-    
-   
+
 
 </head>
 
@@ -40,7 +40,8 @@
                     <div class="col-md-4">
                         <div class="banner_item align-items-center" style="background-image:url(../Content/TemplateImages/banner_1.jpg)">
                             <div class="banner_category">
-                                <a href="categories.html">women's</a>
+                    
+                                @Html.ActionLink("women's", "Catalog", "Home");
                             </div>
                         </div>
                     </div>
@@ -54,7 +55,8 @@
                     <div class="col-md-4">
                         <div class="banner_item align-items-center" style="background-image:url(../Content/TemplateImages/banner_3.jpg)">
                             <div class="banner_category">
-                                <a href="categories.html">men's</a>
+                                @*<a href="categories.html">men's</a>*@
+                                @Html.ActionLink("men`s", "Catalog", "Home");
                             </div>
                         </div>
                     </div>

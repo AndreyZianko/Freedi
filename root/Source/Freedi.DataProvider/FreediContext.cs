@@ -30,7 +30,7 @@ namespace Freedi.DataProvider
         protected override void Seed(FreediContext context)
         {
 
-            context.Goods.Add(new Goods { Name = "Leather Bag", Sex = "Women", Type = "Bag", Price = 220, Currency = "USD", Description = "Very beautiful bag", SKU = "LB220", Stock = true, StockQuantity = 11, Unit = "pieces" });
+            context.Goods.Add(new Goods { Name = "Leather Bag", Sex = "Women", Type = "Bag", Price = 220, Currency = "USD", Description = "Very beautiful bag", Stock = true, StockQuantity = 11 });
             context.SaveChanges();
         }
     }

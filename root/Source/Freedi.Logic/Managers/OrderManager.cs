@@ -54,10 +54,10 @@ namespace Freedi.Logic.Managers
                     Sex = goods.Sex,
                     //Photo = goods.Photo,
                     StockQuantity = goods.StockQuantity,
-                    SKU = goods.SKU,
+
                     Description = goods.Description,
                     Type = goods.Type,
-                    Unit = goods.Unit,
+
                     Stock = goods.Stock
 
                 });

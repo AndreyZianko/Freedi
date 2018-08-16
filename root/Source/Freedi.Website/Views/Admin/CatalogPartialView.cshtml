@@ -21,9 +21,6 @@
                     @Html.DisplayNameFor(model => model.Currency)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Unit)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Type)
                 </th>
                 <th>
@@ -31,9 +28,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Stock)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SKU)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Photo)
@@ -49,9 +43,6 @@
                 </th>
                 <th>
                     Edit
-                </th>
-                <th>
-                    Details
                 </th>
                 <th>
                     Delete
@@ -70,9 +61,6 @@
                     @Html.DisplayNameFor(model => model.Currency)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Unit)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Type)
                 </th>
                 <th>
@@ -81,9 +69,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Stock)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SKU)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.Photo)
                 </th>
@@ -99,9 +85,7 @@
                 <th>
                     Edit
                 </th>
-                <th>
-                    Details
-                </th>
+
                 <th>
                     Delete
                 </th>
@@ -120,9 +104,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Currency)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Unit)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
@@ -131,13 +113,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SKU)
-                </td>
+
                 <td>
                    
-                    <img id="@item.Photo.Select(x=>x.PhotoId).FirstOrDefault()"src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ??"~/PathToDefaultImage")" />
+                    <img src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ??"~/PathToDefaultImage")" />
             
                 </td>
                 <td>
@@ -159,9 +138,7 @@
                         <td>
                             @Ajax.ActionLink("Edit", "EditProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
                         </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })
-                        </td>
+
                         <td>
                             @Ajax.ActionLink("Delete", "DeleteProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
                         </td>

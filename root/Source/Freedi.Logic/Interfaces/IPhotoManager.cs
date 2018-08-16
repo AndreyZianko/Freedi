@@ -11,8 +11,9 @@ namespace Freedi.Logic.Interfaces
    public interface IPhotoManager
     {
         List<PhotosViewModel> UploadPhoto(List<HttpPostedFileBase> _uploadfile, string name);
-        void DeletePhoto(int Id);
-        void UpdatePhoto(int Id);
+        void DeletePhotoByPhotoId(int Id);
         List<string> GetPhotos(int IdGoods);
+        void UpdatePhoto(GoodsViewModel photo);
+        void DeletePhotoFromProjectByPhotoId(int PhotoId);
     }
 }

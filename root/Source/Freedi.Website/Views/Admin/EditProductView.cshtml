@@ -1,16 +1,41 @@
 ﻿@model Freedi.Model.ViewModels.GoodsViewModel
+<script>
+    $('.product_image').on('click', function () {
+        var id = $(this).attr("id");
+        var input = $("[name='" + id + "']");
+        input.focus().click();
+        $("[name='" + id + "']").on('change', function (event) {
+            var output = $('#' + id);
+            var tmppath = URL.createObjectURL(event.target.files[0]);
+            output.attr('src', tmppath);
+            $("[title='" + id + "']").prop("checked", true);
+        });
+    });
+    $('.product_image').on("mouseenter", function () {
+        $(this).css({
+            "opacity": '0.8',
+            "cursor": "pointer",
+            "background": "beige"
+        });
+    })
+        .on("mouseleave", function () {
+            var styles = {
+                opacity: '1',
+                cursor: "default",
+                background: "white"
+            };
+            $(this).css(styles);
+        });
 
 
+</script>
 <section id="ParticularProduct">
-    @using (Ajax.BeginForm("Catalog", "Home", FormMethod.Post, new AjaxOptions
+    @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", data_target = "#myModal", id = "UpdateForm" }))
     {
-        UpdateTargetId = "content",
-    }, new { @class = "form-horizontal", role = "form" }))
-    {
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             @Html.LabelFor(m => m.Id, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Id, new { @class = "form-control", disabled = true })
+                @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
@@ -50,64 +75,37 @@
                 @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
             </div>
         </div>
-        <div class="form-group" style="background:black">
 
-            @foreach (var item in Model.Photo)
-            {
+
+        for (var i = 0; i < Model.Photo.Count(); i++)
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Photo, new { @class = "col-md-2 control-label" , Style ="display:none"})
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Photo[i].PhotoId, new { @class = "form-control", Style = "display:none" })
+                    @Html.CheckBoxFor(m => m.Photo[i].PhotoChange, new { @class = "form-control", title = Model.Photo[i].PhotoId, Style = "display:none" })
+                </div>
+            </div>
+           
+        }
+
+        foreach (var item in Model.Photo)
+        {
+            <div class="form-group">
+
                 <img class="product_image" id="@item.PhotoId" src="@Url.Content(@item.PhotoPath ?? "~/PathToDefaultImage")" />
                 <input type="file" name="@item.PhotoId" style="display:none" />
-            }
+            </div>
+        }
 
-        </div>
-        <script>
-      
-         
-                $('.product_image').on('click', function () {
-                   id = $(this).attr("id");
-                    debugger;
-                    alert(id);
-                    var input = $("[name='" + id + "']");
-                    input.focus().click();
-                    $("[name='" + id + "']").on('change', function (event) {
-                        var tmppath = URL.createObjectURL(event.target.files[0]);
-                        $('.product_image').attr('src', tmppath);    
 
-                    });
-                });
-            $('.product_image').on("mouseenter", function () {
-                $(this).css({
-                    "opacity": '0.8',
-                    "cursor": "pointer"
-                });
-            })
-                .on("mouseleave", function () {
-                    var styles = {
-                        opacity: '1',
-                        cursor: "default"
-                    };
-                    $(this).css(styles);
-                    });
-
-            
-        </script>
         <div class="form-group">
             @Html.LabelFor(m => m.Stock, new { @class = "col-md-2 control-label" })
             <div class="col-md-2">
                 @Html.CheckBoxFor(m => m.Stock, new { @class = "form-control" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Unit, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Unit, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SKU, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.SKU, new { @class = "form-control" })
-            </div>
-        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" id="change" class="btn btn-success">Update</button>

@@ -199,12 +199,15 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Ioc\AutofacConfig.cs" />
     <Compile Include="Ioc\LogicModules.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,6 +241,7 @@
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.min.js" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Errors\Error404.css" />
     <Content Include="Content\img\bootstrap-imageupload.css" />
     <Content Include="Content\img\loading-white-d.gif" />
     <Content Include="Content\TemplateImages\banner_1.jpg" />
@@ -316,11 +320,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\MyScripts\FormSend.js" />
-    <Content Include="Scripts\MyScripts\FreediJS.js" />
     <Content Include="Scripts\MyScripts\jquery.dataTables.js" />
-    <Content Include="Scripts\MyScripts\jquery.imageuploader.js" />
-    <Content Include="Scripts\MyScripts\ResponseJS.js" />
     <Content Include="Scripts\MyScripts\script-custom-validator.js" />
     <Content Include="Scripts\MyScripts\styles.imageuploader.css" />
     <Content Include="Scripts\TemplatePlugins\easing\easing.js" />
@@ -401,10 +401,16 @@
     <Content Include="Views\Admin\AdminView.cshtml" />
     <Content Include="Views\Admin\DeleteProductView.cshtml" />
     <Content Include="Views\Shared\SuccessPartialView.cshtml" />
+    <Content Include="Views\Home\Catalog.cshtml" />
+    <Content Include="Views\Home\SingleProduct.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\PhotoProduct\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

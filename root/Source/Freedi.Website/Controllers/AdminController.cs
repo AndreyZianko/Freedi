@@ -47,36 +47,31 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return PartialView("CreateProductPartialVIew", _goodsViewModel);
-            //}
-
-            //if (_goodsViewModel.UploadedFile[0]!=null)
-            //{
-            //    foreach (var file in _goodsViewModel.UploadedFile)
-            //    {
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-            //            _goodsViewModel.Photo = _goodsViewModel.UploadedFile.ResizeImg(_goodsViewModel.Name);
-
-            //        }
-            //    }
-
-            //}
-
+            if (!ModelState.IsValid)
+            {
+                return PartialView("CreateProductPartialVIew", _goodsViewModel);
+            }
             _goodsViewModel.Photo = _photoManager.UploadPhoto(_goodsViewModel.UploadedFile, _goodsViewModel.Name);
             _goodsManager.CreateProduct(_goodsViewModel);
-              return PartialView("CreateProductPartialVIew");
+            return PartialView("CreateProductPartialVIew");
 
         }
 
 
         [HttpPost]
-        public ActionResult Catalog(GoodsViewModel goods)
+        public ActionResult EditProduct(GoodsViewModel goods)
         {
-                 _goodsManager.GoodsUpdate(goods);
-                return View("SuccessPartialView");
+            foreach (string fileName in Request.Files)
+            {
+                if (Request.Files[fileName] != null && Request.Files[fileName].ContentLength > 0)
+                {
+                    goods.UploadedFile.Add(Request.Files[fileName]);
+                }
+            }
+
+            _photoManager.UpdatePhoto(goods);
+            _goodsManager.GoodsUpdate(goods);
+            return PartialView("EditProductView",_goodsManager.GetGoodsById(goods.Id));
         }
         
         public ActionResult DeleteProduct(int? Id)

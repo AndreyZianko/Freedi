@@ -15,5 +15,6 @@ namespace Freedi.Logic.Interfaces
         void GoodsUpdate(GoodsViewModel _goodsViewModel);
         void CreateProduct(GoodsViewModel _goodsViewModel);
         void  DeleteProduct(int Id);
+        void DeletePhotoFromProjectByPath(int Id);
     }
 }
