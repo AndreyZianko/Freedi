@@ -35,7 +35,7 @@ namespace Freedi.Website.Models
             lineCollection.RemoveAll(l => l.Goods.Id == goodsView.Id);
         }
 
-        public decimal ComputeTotalValue()
+        public decimal TotalValue()
         {
             return lineCollection.Sum(e => e.Goods.Price * e.Quantity);
 

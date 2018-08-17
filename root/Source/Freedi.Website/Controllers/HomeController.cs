@@ -32,7 +32,7 @@ namespace Freedi.Website.Controllers
                 var product = _goodsManager.GetGoodsById(Id);
                 return View(product);
             }
-            return View();
+            return RedirectToAction("Catalog");
         }
      
         public ActionResult About()

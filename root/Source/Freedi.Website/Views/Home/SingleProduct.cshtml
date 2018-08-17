@@ -114,8 +114,10 @@
 <script>
     $("#Add_To_Cart_form").on("submit", function () {
         debugger;
-        var val = $("#quantity_value").text();
-        $("[name=Quantity]").attr("value", val);
+        var cart = $("#quantity_value");
+        var count = cart.text();
+        $("[name=Quantity]").attr("value", count);
+        $("#quantity_value").css('display' , 'block');
     });
 
 </script>
