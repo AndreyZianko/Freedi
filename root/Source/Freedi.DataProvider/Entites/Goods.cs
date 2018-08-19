@@ -1,16 +1,17 @@
-﻿using Freedi.DataProvider.Entites;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Freedi.DataProvider.Models
+namespace Freedi.DataProvider.Entites
 {
     [Table("Goods")]
     public class Goods
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }
@@ -20,13 +21,6 @@ namespace Freedi.DataProvider.Models
         public bool Stock { get; set; }
         public string Description { get; set; }
         public string Sex { get; set; }
-        public virtual ICollection<Photos> Photos { get; set; }
-
-        public Goods()
-        {
-            Photos = new List<Photos>();
-        }
+        public virtual ICollection<Photos> Photos { get; set; } = new List<Photos>();
     }
-
 }
-

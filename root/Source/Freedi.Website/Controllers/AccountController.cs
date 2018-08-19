@@ -1,34 +1,24 @@
-﻿using Freedi.Logic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using Freedi.Website.Models;
 using Microsoft.Owin.Security;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Freedi.Website.Controllers
 {
     public class AccountController : Controller
     {
-        IUserManager _um;
-      
+        private readonly IUserManager _um;
+
         public AccountController(IUserManager um)
         {
             _um = um;
-            
-          
         }
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-           
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         [AllowAnonymous]
         public ActionResult Index()
@@ -39,9 +29,9 @@ namespace Freedi.Website.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
-            return View();
+            return View("Login");
         }
 
         [HttpPost]
@@ -52,8 +42,8 @@ namespace Freedi.Website.Controllers
             await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserViewModel userDto = new UserViewModel { Email = model.Email, Password = model.Password };
-                ClaimsIdentity claim = await _um.Authenticate(userDto);
+                var userDto = new UserViewModel {Email = model.Email, Password = model.Password};
+                var claim = await _um.Authenticate(userDto);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль.");
@@ -69,6 +59,7 @@ namespace Freedi.Website.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
+
             return View(model);
         }
 
@@ -78,7 +69,6 @@ namespace Freedi.Website.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-       
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -91,10 +81,10 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            //await SetInitialDataAsync();
+            await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserViewModel userDto = new UserViewModel
+                var userDto = new UserViewModel
                 {
                     Email = model.Email,
                     Password = model.Password,
@@ -102,14 +92,12 @@ namespace Freedi.Website.Controllers
                     Name = model.Name,
                     Role = "user"
                 };
-                OperationDetails operationDetails = await _um.Create(userDto);
+                var operationDetails = await _um.Create(userDto);
                 if (operationDetails.Succedeed)
-                { 
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                    ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
+                ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
+
             return View(model);
         }
 
@@ -122,8 +110,8 @@ namespace Freedi.Website.Controllers
                 Password = "kxabog123",
                 Name = "Андрей Андреевич Андреев",
                 Address = "ул. Спортивная, д.30, кв.75",
-                Role = "admin",
-            }, new List<string> { "user", "admin" });
+                Role = "admin"
+            }, new List<string> {"user", "admin"});
         }
     }
 }

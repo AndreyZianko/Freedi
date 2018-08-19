@@ -1,20 +1,15 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
 using Freedi.DataProvider.Interfaces;
 using Freedi.DataProvider.Models;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
-using System;
-using System.Collections.Generic;
 
 namespace Freedi.Logic.Managers
 {
     public class OrderManager : IOrderManager
     {
-        private IUnitOfWork _uow { get; set; }
-        private IGoodRepository _goodRepository { get; set; }
-        private IOrderRepository _orderRepository{ get; set; }
-
-        public OrderManager(IUnitOfWork uow, 
+        public OrderManager(IUnitOfWork uow,
             IGoodRepository goodRepository,
             IOrderRepository orderRepository)
         {
@@ -22,12 +17,16 @@ namespace Freedi.Logic.Managers
             _goodRepository = goodRepository;
             _orderRepository = orderRepository;
         }
- 
+
+        private IUnitOfWork _uow { get; }
+        private IGoodRepository _goodRepository { get; }
+        private IOrderRepository _orderRepository { get; }
+
         public void MakeOrder(OrderViewModel orderView)
         {
             var good = _goodRepository.Get(orderView.GoodId);
-           
-          
+
+
             var order = new Order
             {
                 Date = DateTime.Now,
@@ -44,7 +43,6 @@ namespace Freedi.Logic.Managers
             var allgoods = _goodRepository.GetAll();
             var result = new List<GoodsViewModel>();
             foreach (var goods in allgoods)
-            {
                 result.Add(new GoodsViewModel
                 {
                     Id = goods.Id,
@@ -59,25 +57,19 @@ namespace Freedi.Logic.Managers
                     Type = goods.Type,
 
                     Stock = goods.Stock
-
                 });
-
-
-            }
             return result;
         }
 
         public GoodsViewModel GetGood(int? id)
         {
-
             if (id != null)
             {
                 var good = _goodRepository.Get(id);
-                return new GoodsViewModel { Id = good.Id, Name = good.Name, Price = good.Price };
+                return new GoodsViewModel {Id = good.Id, Name = good.Name, Price = good.Price};
             }
-            else
-                return null;
-           
+
+            return null;
         }
     }
 }

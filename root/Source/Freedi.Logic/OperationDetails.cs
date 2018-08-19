@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Freedi.Logic
+﻿namespace Freedi.Logic
 {
     public class OperationDetails
     {
@@ -14,8 +8,9 @@ namespace Freedi.Logic
             Message = message;
             Property = prop;
         }
-        public bool Succedeed { get; private set; }
-        public string Message { get; private set; }
-        public string Property { get; private set; }
+
+        public bool Succedeed { get; }
+        public string Message { get; }
+        public string Property { get; }
     }
 }

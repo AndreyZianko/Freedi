@@ -1,6 +1,6 @@
-﻿using Freedi.DataProvider.Entites;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Freedi.DataProvider.Entites;
 
 namespace Freedi.DataProvider.Models
 {
@@ -14,6 +14,5 @@ namespace Freedi.DataProvider.Models
         public int GoodId { get; set; }
         public Goods Good { get; set; }
         public DateTime Date { get; set; }
-        
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Freedi.Website.Controllers
 {
@@ -14,15 +10,11 @@ namespace Freedi.Website.Controllers
             return View();
         }
 
-        public ActionResult Forbidden()
+
+        public ActionResult InternalServerError()
         {
-            Response.StatusCode = 403;
+            Response.StatusCode = 500;
             return View();
         }
-        //public ActionResult ServerError()
-        //{
-        //    Response.StatusCode = 500;
-        //    return View();
-        //}
     }
 }

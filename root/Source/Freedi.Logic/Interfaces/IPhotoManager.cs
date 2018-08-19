@@ -1,19 +1,15 @@
-﻿using Freedi.Model.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web;
+using Freedi.Model.ViewModels;
 
 namespace Freedi.Logic.Interfaces
 {
-   public interface IPhotoManager
+    public interface IPhotoManager
     {
-        List<PhotosViewModel> UploadPhoto(List<HttpPostedFileBase> _uploadfile, string name);
-        void DeletePhotoByPhotoId(int Id);
-        List<string> GetPhotos(int IdGoods);
+        List<PhotosViewModel> UploadPhoto(List<HttpPostedFileBase> uploadfile, string name);
+        void DeletePhotoByPhotoId(int id);
+        List<string> GetPhotos(int idGoods);
         void UpdatePhoto(GoodsViewModel photo);
-        void DeletePhotoFromProjectByPhotoId(int PhotoId);
+        void DeletePhotoFromProjectByPhotoId(int photoId);
     }
 }

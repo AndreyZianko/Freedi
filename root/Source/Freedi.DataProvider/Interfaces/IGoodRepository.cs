@@ -1,11 +1,10 @@
-﻿using Freedi.DataProvider.Models;
-using System.Collections.Generic;
+﻿using Freedi.DataProvider.Entites;
+using Freedi.DataProvider.Models;
 
 namespace Freedi.DataProvider.Interfaces
 {
-     public interface IGoodRepository : IRepository<Goods>
+    public interface IGoodRepository : IRepository<Goods>
     {
-
         void Save();
     }
 }

@@ -1,78 +1,82 @@
 ﻿@model Freedi.Model.ViewModels.GoodsViewModel
 <script>
-    $('.product_image').on('click', function () {
-        var id = $(this).attr("id");
-        var input = $("[name='" + id + "']");
-        input.focus().click();
-        $("[name='" + id + "']").on('change', function (event) {
-            var output = $('#' + id);
-            var tmppath = URL.createObjectURL(event.target.files[0]);
-            output.attr('src', tmppath);
-            $("[title='" + id + "']").prop("checked", true);
+    $('.product_image').on('click',
+        function() {
+            var id = $(this).attr("id");
+            var input = $("[name='" + id + "']");
+            input.focus().click();
+            $("[name='" + id + "']").on('change',
+                function(event) {
+                    var output = $('#' + id);
+                    var tmppath = URL.createObjectURL(event.target.files[0]);
+                    output.attr('src', tmppath);
+                    $("[title='" + id + "']").prop("checked", true);
+                });
         });
-    });
-    $('.product_image').on("mouseenter", function () {
-        $(this).css({
-            "opacity": '0.8',
-            "cursor": "pointer",
-            "background": "beige"
-        });
-    })
-        .on("mouseleave", function () {
-            var styles = {
-                opacity: '1',
-                cursor: "default",
-                background: "white"
-            };
-            $(this).css(styles);
-        });
+    $('.product_image').on("mouseenter",
+            function() {
+                $(this).css({
+                    "opacity": '0.8',
+                    "cursor": "pointer",
+                    "background": "beige"
+                });
+            })
+        .on("mouseleave",
+            function() {
+                var styles = {
+                    opacity: '1',
+                    cursor: "default",
+                    background: "white"
+                };
+                $(this).css(styles);
+            });
 
 
 </script>
 <section id="ParticularProduct">
-    @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data", data_target = "#myModal", id = "UpdateForm" }))
+    @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data", data_target = "#myModal", id = "UpdateForm"}))
     {
-        <div class="form-group" style="display:none">
-            @Html.LabelFor(m => m.Id, new { @class = "col-md-2 control-label" })
+        <div class="form-group" style="display: none">
+            @Html.LabelFor(m => m.Id, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Id, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Name, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Price, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Price, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Currency, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Currency, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Currency, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Currency, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.StockQuantity, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.StockQuantity, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.StockQuantity, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.StockQuantity, new {@class = "form-control"})
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Sex, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Sex, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Sex, new {@class = "form-control"})
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Type, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Type, new {@class = "form-control"})
             </div>
         </div>
 
@@ -80,29 +84,28 @@
         for (var i = 0; i < Model.Photo.Count(); i++)
         {
             <div class="form-group">
-                @Html.LabelFor(m => m.Photo, new { @class = "col-md-2 control-label" , Style ="display:none"})
+                @Html.LabelFor(m => m.Photo, new {@class = "col-md-2 control-label", Style = "display:none"})
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Photo[i].PhotoId, new { @class = "form-control", Style = "display:none" })
-                    @Html.CheckBoxFor(m => m.Photo[i].PhotoChange, new { @class = "form-control", title = Model.Photo[i].PhotoId, Style = "display:none" })
+                    @Html.TextBoxFor(m => m.Photo[i].PhotoId, new {@class = "form-control", Style = "display:none"})
+                    @Html.CheckBoxFor(m => m.Photo[i].PhotoChange, new {@class = "form-control", title = Model.Photo[i].PhotoId, Style = "display:none"})
                 </div>
             </div>
-           
         }
 
         foreach (var item in Model.Photo)
         {
             <div class="form-group">
 
-                <img class="product_image" id="@item.PhotoId" src="@Url.Content(@item.PhotoPath ?? "~/PathToDefaultImage")" />
-                <input type="file" name="@item.PhotoId" style="display:none" />
+                <img class="product_image" id="@item.PhotoId" src="@Url.Content(item.PhotoPath ?? "~/PathToDefaultImage")"/>
+                <input type="file" name="@item.PhotoId" style="display: none"/>
             </div>
         }
 
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Stock, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Stock, new {@class = "col-md-2 control-label"})
             <div class="col-md-2">
-                @Html.CheckBoxFor(m => m.Stock, new { @class = "form-control" })
+                @Html.CheckBoxFor(m => m.Stock, new {@class = "form-control"})
             </div>
         </div>
 
@@ -114,5 +117,3 @@
     }
 
 </section>
-
-    

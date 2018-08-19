@@ -1,57 +1,64 @@
-﻿using Freedi.Logic.Interfaces;
-using Freedi.Model.ViewModels;
-using Freedi.Website.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using Freedi.Logic.Interfaces;
+using Freedi.Logic.Managers;
 
 namespace Freedi.Website.Controllers
 {
-  
     public class CartController : Controller
     {
-        private IGoodsManager _goodsManager { get; set; }
         public CartController(IGoodsManager goodsManager)
         {
-            _goodsManager = goodsManager;
+            GoodsManager = goodsManager;
         }
+
+        private IGoodsManager GoodsManager { get; }
+
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult AddToCart(int? Id , string Quantity)
+        public ActionResult AddToCart(int? id, string quantity)
         {
-            if(Id!=null)
-            { 
-                var item = _goodsManager.GetGoodsById(Id);
-                if (_goodsManager.GetGoodsById(Id).StockQuantity > Convert.ToInt32(Quantity)&& item!=null && item.Stock)
-                {
-                    GetCart().AddItem(item, Convert.ToInt32(Quantity));
+            if (id != null)
+            {
+                var item = GoodsManager.GetGoodsById(id);
               
-                }
+                if (item.StockQuantity > Convert.ToInt32(quantity) && item != null && item.Stock)
+                    GetCart().AddItem(item, quantity!=null? Convert.ToInt32(quantity):0);
             }
-            return Content(GetCart().Lines.Select(x => x.Quantity).First().ToString());
+
+            return Content(GetCart().TotalGoods().ToString());
         }
+
+        public ActionResult RemoveFromCart(int id)
+        {
+            GetCart().RemoveLine(id);
+
+            return PartialView("GetCartView", GetCart().CartFull());
+        }
+
+        public int CartItemsCounter()
+        {
+            return GetCart().TotalGoods();
+        }
+
         public ActionResult GetCartView()
         {
-            CartViewModel model = new CartViewModel();
-            model.Price = GetCart().Lines.Select(x => x.Goods.Price).FirstOrDefault();
-            model.ProductName = GetCart().Lines.Select(x => x.Goods.Name).FirstOrDefault();
-            model.Quantity = GetCart().Lines.Select(x => x.Quantity).FirstOrDefault();
-            model.TotalPrice = GetCart().TotalValue();
-            return PartialView("GetCartView",model);
+            return PartialView("GetCartView", GetCart().CartFull());
         }
-        public Cart GetCart()
+
+        public CartManager GetCart()
         {
-            Cart cart = (Cart)Session["Cart"];
+            var cart = (CartManager) Session["Cart"];
             if (cart == null)
             {
-                cart = new Cart();
+                cart = new CartManager();
                 Session["Cart"] = cart;
             }
+
             return cart;
         }
     }

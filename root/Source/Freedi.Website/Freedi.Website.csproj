@@ -207,8 +207,6 @@
     </Compile>
     <Compile Include="Ioc\AutofacConfig.cs" />
     <Compile Include="Ioc\LogicModules.cs" />
-    <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -242,6 +240,9 @@
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.min.js" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\Cart\Cart.css" />
+    <Content Include="Content\Cart\Images\1.png" />
+    <Content Include="Content\Cart\Images\2.png" />
     <Content Include="Content\Errors\Error404.css" />
     <Content Include="Content\img\bootstrap-imageupload.css" />
     <Content Include="Content\img\loading-white-d.gif" />
@@ -308,6 +309,7 @@
     <Content Include="Content\AdminPanel\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.min.map" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.map" />
+    <None Include="Properties\PublishProfiles\Freedi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -345,7 +347,9 @@
     <Content Include="Scripts\TemplateScripts\custom.js" />
     <Content Include="Scripts\TemplateScripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\TemplateScripts\single_custom.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -377,8 +381,7 @@
     <Content Include="Views\Home\Catalog.cshtml" />
     <Content Include="Views\Home\SingleProduct.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\Error\Forbidden.cshtml" />
-    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Cart\GetCartView.cshtml" />
   </ItemGroup>
   <ItemGroup>

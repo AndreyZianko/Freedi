@@ -1,37 +1,34 @@
-﻿using Freedi.DataProvider.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Freedi.DataProvider.Interfaces;
 
 namespace Freedi.DataProvider.Repositories
 {
     public class BaseRepository<T> : IRepository<T> where T : class
     {
-        FreediContext _context;
-        protected readonly DbSet<T> _dbset;
+        protected readonly DbSet<T> Dbset;
+        private readonly FreediContext _context;
 
         public BaseRepository(FreediContext context)
         {
             _context = context;
-            _dbset = context.Set<T>();
+            Dbset = context.Set<T>();
         }
 
         public void Create(T item)
         {
-            _dbset.Add(item);
-
+            Dbset.Add(item);
         }
 
         public bool Delete(int id)
         {
-            T resault = _dbset.Find(id);
+            var resault = Dbset.Find(id);
 
             if (resault != null)
             {
-                _dbset.Remove(resault);
+                Dbset.Remove(resault);
                 return true;
             }
 
@@ -40,13 +37,13 @@ namespace Freedi.DataProvider.Repositories
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
         {
-            IEnumerable<T> result = _dbset.Where(predicate).ToList();
+            IEnumerable<T> result = Dbset.Where(predicate).ToList();
             return result;
         }
 
         public IEnumerable<T> GetAll()
         {
-            return _dbset.ToList();
+            return Dbset.ToList();
         }
 
         public void Update(T item)
@@ -56,10 +53,8 @@ namespace Freedi.DataProvider.Repositories
 
         public T Get(int? id)
         {
-            T resault = _dbset.Find(id);
+            var resault = Dbset.Find(id);
             return resault;
         }
-
-
     }
 }

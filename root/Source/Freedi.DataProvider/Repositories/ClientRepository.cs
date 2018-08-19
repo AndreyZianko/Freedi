@@ -2,23 +2,16 @@
 using Freedi.DataProvider.Identity;
 using Freedi.DataProvider.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Freedi.DataProvider.Repositories
-{ 
-    public class ClientRepository : BaseRepository<ClientRepository>,IClientRepository
+{
+    public class ClientRepository : BaseRepository<ClientRepository>, IClientRepository
     {
-        private FreediContext _context;
+        private readonly FreediContext _context;
 
         public ClientRepository(FreediContext context) : base(context)
         {
-            
             _context = context;
-      
         }
 
         public void Create(ClientProfile item)
@@ -26,10 +19,12 @@ namespace Freedi.DataProvider.Repositories
             _context.ClientProfiles.Add(item);
             _context.SaveChanges();
         }
+
         public ApplicationUserManager UserManager()
         {
             return new ApplicationUserManager(new UserStore<ApplicationUser>(_context));
         }
+
         public ApplicationRoleManager RoleManager()
         {
             return new ApplicationRoleManager(new RoleStore<ApplicationRole>(_context));

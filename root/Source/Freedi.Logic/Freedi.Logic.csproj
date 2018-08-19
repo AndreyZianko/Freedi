@@ -93,6 +93,7 @@
     <Compile Include="Interfaces\IOrderManager.cs" />
     <Compile Include="Interfaces\IPhotoManager.cs" />
     <Compile Include="Interfaces\IUserManager.cs" />
+    <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\PhotoManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\GoodsManager.cs" />

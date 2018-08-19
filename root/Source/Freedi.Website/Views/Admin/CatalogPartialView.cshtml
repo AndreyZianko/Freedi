@@ -1,99 +1,104 @@
 ﻿@model IEnumerable<Freedi.Model.ViewModels.GoodsViewModel>
 
 
-
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>
+                 
+
+                    <a  data-ajax="true" data-ajax-mode="replace" data-ajax-update="#content" href="/Admin/Catalog/"><i class="fas fa-sync-alt"></i></a>
+               
+                </th>
+                <th>
                     @Ajax.ActionLink("CreateProduct", "CreateProduct", "Admin", new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
                 </th>
             </tr>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Currency)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StockQuantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Stock)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Photo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhotoCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sex)
-                </th>
-                <th>
-                    Edit
-                </th>
-                <th>
-                    Delete
-                </th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
         </thead>
         <tfoot>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Currency)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StockQuantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Stock)
-                </th>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Photo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhotoCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sex)
-                </th>
-                <th>
-                    Edit
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                Edit
+            </th>
 
-                <th>
-                    Delete
-                </th>
-            </tr>
+            <th>
+                Delete
+            </th>
+        </tr>
         </tfoot>
         <tbody>
-            @foreach (var item in Model)
-            {
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -112,12 +117,12 @@
                     @Html.DisplayFor(modelItem => item.StockQuantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Stock)
+                @Html.DisplayFor(modelItem => item.Stock)
 
                 <td>
-                   
-                    <img src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ??"~/PathToDefaultImage")" />
-            
+
+                    <img src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ?? "~/PathToDefaultImage")"/>
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PhotoCount)
@@ -132,23 +137,20 @@
 
                 @if (Request.IsAuthenticated)
                 {
-                    if (this.User.IsInRole("admin"))
+                    if (User.IsInRole("admin"))
                     {
-
                         <td>
-                            @Ajax.ActionLink("Edit", "EditProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
+                            @Ajax.ActionLink("Edit", "EditProduct", "Admin", new {id = item.Id}, new AjaxOptions {UpdateTargetId = "productList"}, new {data_toggle = "modal", data_target = "#myModal"})
                         </td>
 
                         <td>
-                            @Ajax.ActionLink("Delete", "DeleteProduct", "Admin", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "productList" }, new { data_toggle = "modal", data_target = "#myModal" })
+                            @Ajax.ActionLink("Delete", "DeleteProduct", "Admin", new {id = item.Id}, new AjaxOptions {UpdateTargetId = "productList"}, new {data_toggle = "modal", data_target = "#myModal"})
                         </td>
-
-
                     }
                 }
 
             </tr>
-            }
+        }
         </tbody>
     </table>
 </div>

@@ -1,130 +1,127 @@
+using System.Data.Entity.Migrations;
 
 namespace Freedi.DataProvider.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.ClientProfiles",
-                c => new
+                    "dbo.ClientProfiles",
+                    c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(false, 128),
                         Name = c.String(),
-                        Address = c.String(),
+                        Address = c.String()
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)
                 .Index(t => t.Id);
-            
+
             CreateTable(
-                "dbo.AspNetUsers",
-                c => new
+                    "dbo.AspNetUsers",
+                    c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(false, 128),
                         Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
+                        EmailConfirmed = c.Boolean(false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
                         PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        PhoneNumberConfirmed = c.Boolean(false),
+                        TwoFactorEnabled = c.Boolean(false),
                         LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
+                        LockoutEnabled = c.Boolean(false),
+                        AccessFailedCount = c.Int(false),
+                        UserName = c.String(false, 256)
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
+
             CreateTable(
-                "dbo.AspNetUserClaims",
-                c => new
+                    "dbo.AspNetUserClaims",
+                    c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(false, true),
+                        UserId = c.String(false, 128),
                         ClaimType = c.String(),
-                        ClaimValue = c.String(),
+                        ClaimValue = c.String()
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
+                    "dbo.AspNetUserLogins",
+                    c => new
                     {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        LoginProvider = c.String(false, 128),
+                        ProviderKey = c.String(false, 128),
+                        UserId = c.String(false, 128)
                     })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .PrimaryKey(t => new {t.LoginProvider, t.ProviderKey, t.UserId})
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
+                    "dbo.AspNetUserRoles",
+                    c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(false, 128),
+                        RoleId = c.String(false, 128)
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .PrimaryKey(t => new {t.UserId, t.RoleId})
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
+
             CreateTable(
-                "dbo.Goods",
-                c => new
+                    "dbo.Goods",
+                    c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(false, true),
                         Name = c.String(),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Price = c.Decimal(false, 18, 2),
                         Currency = c.String(),
                         Unit = c.String(),
                         Type = c.String(),
-                        StockQuantity = c.Int(nullable: false),
-                        Stock = c.Boolean(nullable: false),
+                        StockQuantity = c.Int(false),
+                        Stock = c.Boolean(false),
                         SKU = c.String(),
                         Photo = c.String(),
                         Description = c.String(),
-                        Sex = c.String(),
+                        Sex = c.String()
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
-                "dbo.Order",
-                c => new
+                    "dbo.Order",
+                    c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Sum = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Id = c.Int(false, true),
+                        Sum = c.Decimal(false, 18, 2),
                         PhoneNumber = c.String(),
                         Address = c.String(),
-                        GoodId = c.Int(nullable: false),
-                        Date = c.DateTime(nullable: false),
+                        GoodId = c.Int(false),
+                        Date = c.DateTime(false)
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Goods", t => t.GoodId, cascadeDelete: true)
+                .ForeignKey("dbo.Goods", t => t.GoodId, true)
                 .Index(t => t.GoodId);
-            
+
             CreateTable(
-                "dbo.AspNetRoles",
-                c => new
+                    "dbo.AspNetRoles",
+                    c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(false, 128),
+                        Name = c.String(false, 256),
+                        Discriminator = c.String(false, 128)
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
@@ -134,13 +131,13 @@ namespace Freedi.DataProvider.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Order", new[] { "GoodId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.Order", new[] {"GoodId"});
+            DropIndex("dbo.AspNetUserRoles", new[] {"RoleId"});
+            DropIndex("dbo.AspNetUserRoles", new[] {"UserId"});
+            DropIndex("dbo.AspNetUserLogins", new[] {"UserId"});
+            DropIndex("dbo.AspNetUserClaims", new[] {"UserId"});
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.ClientProfiles", new[] { "Id" });
+            DropIndex("dbo.ClientProfiles", new[] {"Id"});
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Order");
             DropTable("dbo.Goods");

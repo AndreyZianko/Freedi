@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace Freedi.DataProvider.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class fixmodel : DbMigration
     {
         public override void Up()
@@ -10,7 +9,7 @@ namespace Freedi.DataProvider.Migrations
             DropColumn("dbo.Goods", "Unit");
             DropColumn("dbo.Goods", "SKU");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Goods", "SKU", c => c.String());

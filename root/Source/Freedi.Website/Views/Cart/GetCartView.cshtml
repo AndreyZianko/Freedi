@@ -1,58 +1,103 @@
-﻿@model Freedi.Website.Models.CartViewModel
+﻿@model Freedi.Logic.Managers.CartViewModel
 @{
 
     Layout = null;
 }
 
+
+<link href="~/Content/Cart/Cart.css" rel="stylesheet"/>
+<script>
+    $(document).ready(function() {
+        $('.alert-close').on('click',
+            function(event) {
+                var parent = event.target.parentElement;
+                debugger;
+                $(parent).fadeOut('slow',
+                    function(c) {
+                        debugger;
+                        $(this).remove();
+                        $.ajax({
+                            url: "/Cart/CartItemsCounter",
+                            success: function(result) {
+                                debugger;
+                                var cartcounter = $("#checkout_items");
+                                if (result > 0) {
+                                    cartcounter.fadeIn('slow',
+                                        function(c) {
+                                            $(this).show();
+                                        });
+                                    cartcounter.html(result);
+                                } else {
+                                    cartcounter.hide();
+                                }
+
+
+                            }
+                        });
+                    });
+            });
+    });
+</script>
+
+
+<!-- main -->
+<div class="main" id="MainID">
     
-    <div class="table-responsive">
-        <table class="table table-hover" id="CartTable"  cellspacing="0">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TotalPrice)
-                    </th>
-                 
-                </tr>
-            </thead>
+    <div class="main-grid2">
+        <h2>
+            My Shopping Bag
+            @if (Model.TotalGoods > 0)
+            {
+                @Model.TotalGoods
+            }
+        </h2>
 
-            <tbody>
-              
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.TotalPrice)
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-success">Order</button>
-                      
-                    </td>
-                    <td>
-                        <button type="button" id =""class="btn btn-danger">Remove</button>
+        @{
+            var i = 0;
 
-                    </td>
-                </tr>
-            </tbody>
+            foreach (var item in Model.Lines.Select(x => x.Goods))
+            {
+                <div class="cart_box">
+                    <div class="message">
+
+                        <div class="list_img">
+                            <img src="@Url.Content(item.Photo.Select(x => x.PhotoPath).FirstOrDefault() ?? "~/PathToDefaultImage")" class="img-responsive" alt=""/>
+                        </div>
+                        <div class="list_desc">
+                            <h4>
+                                @Html.ActionLink(item.Name, "SingleProduct", "Home", new {item.Id}, null)
+                            </h4>
+                            <span class="actual">
+                                @item.Price @item.Currency
+                            </span>
+
+                        </div>
+                        <div class="list_desc">
+                            <h4>Quantity</h4>
+                            <span class="actual">
+                                @Model.Lines.Select(x => x.Quantity).ToList()[i]
+                            </span>
+                        </div>
+
+                        <a class="alert-close" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#MainID" href="/Cart/RemoveFromCart/@item.Id">
+                            <div style="z-index: 100" class="alert-close"></div>
+                        </a>
+                    </div>
+                </div>
+                i++;
+            }
+        }
 
 
-            </table>
-
+        <div class="total">
+            <div class="total-left">
+                <p>Total :<span> @Model.TotalValue</span></p>
+            </div>
+            <div class="total-right">
+                <a href="#">Check Out</a>
+            </div>
+            <div class="clear"> </div>
+        </div>
     </div>
-    
+
+</div>

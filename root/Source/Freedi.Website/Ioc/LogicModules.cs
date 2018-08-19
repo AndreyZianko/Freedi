@@ -9,9 +9,9 @@ namespace Freedi.Website.Ioc
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<OrderManager>()
-                   .As<IOrderManager>().InstancePerRequest();
+                .As<IOrderManager>().InstancePerRequest();
             builder.RegisterType<GoodsManager>()
-                   .As<IGoodsManager>().InstancePerRequest();
+                .As<IGoodsManager>().InstancePerRequest();
         }
     }
 }
