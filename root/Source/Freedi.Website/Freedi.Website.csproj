@@ -202,6 +202,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -327,10 +328,6 @@
     <Content Include="Scripts\MyScripts\script-custom-validator.js" />
     <Content Include="Scripts\MyScripts\styles.imageuploader.css" />
     <Content Include="Scripts\TemplatePlugins\easing\easing.js" />
-    <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="Content\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Scripts\TemplatePlugins\Isotope\isotope.pkgd.min.js" />
     <Content Include="Scripts\TemplatePlugins\jquery-ui-1.12.1.custom\jquery-ui.css" />
     <Content Include="Scripts\TemplatePlugins\jquery-ui-1.12.1.custom\jquery-ui.js" />
@@ -361,11 +358,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\font-awesome-4.7.0\fonts\FontAwesome.otf" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.eot" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Scripts\TemplatePlugins\themify-icons\fonts\themify.woff" />
@@ -387,6 +379,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\PhotoProduct\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

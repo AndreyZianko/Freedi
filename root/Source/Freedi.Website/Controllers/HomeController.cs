@@ -7,11 +7,11 @@ namespace Freedi.Website.Controllers
     public class HomeController : Controller
     {
         private readonly IGoodsManager _goodsManager;
-        private IOrderManager _orderManager;
+        
 
-        public HomeController(IOrderManager orderManager, IGoodsManager goodsManager)
+        public HomeController( IGoodsManager goodsManager)
         {
-            _orderManager = orderManager;
+        
             _goodsManager = goodsManager;
         }
 
@@ -26,11 +26,11 @@ namespace Freedi.Website.Controllers
         }
 
         [Authorize]
-        public ActionResult SingleProduct(int? Id)
+        public ActionResult SingleProduct(int? id)
         {
-            if (Id != null)
+            if (id != null)
             {
-                return _goodsManager.GetGoodsById(Id) != null ? (ActionResult)View(_goodsManager.GetGoodsById(Id)) : RedirectToAction("Catalog");
+                return _goodsManager.GetGoodsById(id) != null ? (ActionResult)View(_goodsManager.GetGoodsById(id)) : RedirectToAction("Catalog");
             }
 
             return RedirectToAction("Catalog");

@@ -1,5 +1,5 @@
-﻿using Freedi.DataProvider.Interfaces;
-using Freedi.DataProvider.Models;
+﻿using Freedi.DataProvider.Entites;
+using Freedi.DataProvider.Interfaces;
 
 namespace Freedi.DataProvider.Repositories
 {

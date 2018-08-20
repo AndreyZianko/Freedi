@@ -1,5 +1,4 @@
 ﻿using Freedi.DataProvider.Entites;
-using Freedi.DataProvider.Models;
 
 namespace Freedi.DataProvider.Interfaces
 {

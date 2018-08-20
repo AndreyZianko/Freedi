@@ -22,5 +22,6 @@ namespace Freedi.DataProvider.Entites
         public string Description { get; set; }
         public string Sex { get; set; }
         public virtual ICollection<Photos> Photos { get; set; } = new List<Photos>();
+       
     }
 }

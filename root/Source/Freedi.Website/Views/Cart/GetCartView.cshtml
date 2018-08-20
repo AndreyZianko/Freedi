@@ -1,4 +1,4 @@
-﻿@model Freedi.Logic.Managers.CartViewModel
+﻿@model Freedi.Model.ViewModels.CartModels.CartViewModel
 @{
 
     Layout = null;
@@ -94,7 +94,7 @@
                 <p>Total :<span> @Model.TotalValue</span></p>
             </div>
             <div class="total-right">
-                <a href="#">Check Out</a>
+                <a href="/order/MakeOrder">Check Out</a>
             </div>
             <div class="clear"> </div>
         </div>

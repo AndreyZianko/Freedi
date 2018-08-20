@@ -10,7 +10,7 @@ namespace Freedi.DataProvider.Infrastructure
         {
             builder.RegisterType<FreediContext>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
-            builder.RegisterType<GoodRepository>().As<IGoodRepository>().InstancePerRequest();
+            builder.RegisterType<GoodsRepository>().As<IGoodRepository>().InstancePerRequest();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerRequest();
             builder.RegisterType<ClientRepository>().As<IClientRepository>().InstancePerRequest();
             builder.RegisterType<PhotosRepository>().As<IPhotosRepository>().InstancePerRequest();

@@ -1,14 +1,13 @@
 ﻿using Freedi.DataProvider.Entites;
 using Freedi.DataProvider.Interfaces;
-using Freedi.DataProvider.Models;
 
 namespace Freedi.DataProvider.Repositories
 {
-    public class GoodRepository : BaseRepository<Goods>, IGoodRepository
+    public class GoodsRepository : BaseRepository<Goods>, IGoodRepository
     {
         private readonly FreediContext _context;
 
-        public GoodRepository(FreediContext context) : base(context)
+        public GoodsRepository(FreediContext context) : base(context)
         {
             _context = context;
         }

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web.Hosting;
 using Freedi.DataProvider.Entites;
 using Freedi.DataProvider.Interfaces;
-using Freedi.DataProvider.Models;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 

@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using Freedi.DataProvider.Entites;
 using Freedi.DataProvider.Migrations;
-using Freedi.DataProvider.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Photos = Freedi.DataProvider.Entites.Photos;
 
@@ -26,23 +25,5 @@ namespace Freedi.DataProvider
         public virtual DbSet<Photos> Photos { get; set; }
     }
 
-    //    class StoreDbInitializer : MigrateDatabaseToLatestVersion<FreediContext, Configuration>
-    //{
-    //    protected override void Seed(FreediContext context)
-    //    {
-    //        context.Goods.Add(new Goods
-    //        {
-    //            Name = "Leather Bag",
-    //            Sex = "Women",
-    //            Type = "Bag",
-    //            Price = 220,
-    //            Currency = "USD",
-    //            Description = "Very beautiful bag",
-    //            Stock = true,
-    //            StockQuantity = 11
-
-    //        });
-    //        context.SaveChanges();
-    //    }
-    //}
+  
 }

@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Freedi.Logic.Interfaces;
 using Freedi.Logic.Managers;
+
 
 namespace Freedi.Website.Controllers
 {
     public class CartController : Controller
     {
-        public CartController(IGoodsManager goodsManager)
+        public CartController(IGoodsManager goodsManager, IOrderManager orderManager)
         {
             GoodsManager = goodsManager;
+            OrderManager = orderManager;
         }
 
         private IGoodsManager GoodsManager { get; }
-
+        private IOrderManager OrderManager { get; }
         public ActionResult Index()
         {
             return View();
@@ -26,7 +29,7 @@ namespace Freedi.Website.Controllers
             {
                 var item = GoodsManager.GetGoodsById(id);
               
-                if (item.StockQuantity > Convert.ToInt32(quantity) && item != null && item.Stock)
+                if (item.StockQuantity > Convert.ToInt32(quantity)  && item.Stock)
                     GetCart().AddItem(item, quantity!=null? Convert.ToInt32(quantity):0);
             }
 
@@ -45,6 +48,7 @@ namespace Freedi.Website.Controllers
             return GetCart().TotalGoods();
         }
 
+        
         public ActionResult GetCartView()
         {
             return PartialView("GetCartView", GetCart().CartFull());
@@ -61,5 +65,7 @@ namespace Freedi.Website.Controllers
 
             return cart;
         }
+
+      
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Freedi.DataProvider.Entites;
 using Freedi.DataProvider.Interfaces;
-using Freedi.DataProvider.Models;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
+using Freedi.Model.ViewModels.CartModels;
+using CartLine = Freedi.DataProvider.Entites.CartLine;
 
 namespace Freedi.Logic.Managers
 {
@@ -17,23 +20,23 @@ namespace Freedi.Logic.Managers
             _goodRepository = goodRepository;
             _orderRepository = orderRepository;
         }
-
         private IUnitOfWork _uow { get; }
         private IGoodRepository _goodRepository { get; }
         private IOrderRepository _orderRepository { get; }
 
         public void MakeOrder(OrderViewModel orderView)
         {
-            var good = _goodRepository.Get(orderView.GoodId);
-
-
             var order = new Order
             {
                 Date = DateTime.Now,
-                Address = orderView.Address,
-                GoodId = good.Id,
-                PhoneNumber = orderView.PhoneNumber
+                Sum = orderView.Sum,
+                CartLines =  orderView.CartModel.Lines.Select(li => new CartLine {ProductId = li.Goods.Id , Quantity  = li.Quantity } ).ToList(),
+                ClientName =  orderView.ClientName
+
             };
+
+        
+
             _orderRepository.Create(order);
             _uow.Save();
         }

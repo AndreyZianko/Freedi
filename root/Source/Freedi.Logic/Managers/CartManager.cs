@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Freedi.Model.ViewModels;
+using Freedi.Model.ViewModels.CartModels;
 
 namespace Freedi.Logic.Managers
 {
@@ -8,14 +9,14 @@ namespace Freedi.Logic.Managers
     {
         private readonly CartViewModel _cart = new CartViewModel();
 
-        public IEnumerable<CartLine> Lines => _cart.Lines;
+        public IEnumerable<CartLineView> Lines => _cart.Lines;
 
         public void AddItem(GoodsViewModel goodsViewModel, int quantity)
         {
             var line = _cart.Lines.FirstOrDefault(g => g.Goods.Id == goodsViewModel.Id);
 
             if (line == null)
-                _cart.Lines.Add(new CartLine
+                _cart.Lines.Add(new CartLineView()
                 {
                     Goods = goodsViewModel,
                     Quantity = quantity
@@ -46,7 +47,7 @@ namespace Freedi.Logic.Managers
 
         public CartViewModel CartFull()
         {
-            if (_cart.Lines != null)
+            if (_cart.Lines != null &&_cart.Lines.Count!=0)
             {
                 _cart.TotalValue = TotalValue();
                 _cart.TotalGoods = TotalGoods();
@@ -56,23 +57,7 @@ namespace Freedi.Logic.Managers
         }
     }
 
-    public class CartLine
-    {
-        public GoodsViewModel Goods { get; set; }
-        public int Quantity { get; set; }
-    }
+   
 
-    public class CartViewModel
-    {
-        public CartViewModel()
-        {
-            Lines = new List<CartLine>();
-        }
-
-        public List<CartLine> Lines { get; set; }
-
-
-        public int TotalGoods { get; set; }
-        public decimal TotalValue { get; set; }
-    }
+   
 }
