@@ -15,7 +15,7 @@ namespace Freedi.Website.Controllers
             _goodsManager = goodsManager;
         }
 
-        public ActionResult Index()
+        public ActionResult Freedi()
         {
             return View();
         }

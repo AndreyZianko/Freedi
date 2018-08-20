@@ -94,7 +94,7 @@
                 <p>Total :<span> @Model.TotalValue</span></p>
             </div>
             <div class="total-right">
-                <a href="/order/MakeOrder">Check Out</a>
+                @Html.ActionLink("Order", "MakeOrder", "order")
             </div>
             <div class="clear"> </div>
         </div>

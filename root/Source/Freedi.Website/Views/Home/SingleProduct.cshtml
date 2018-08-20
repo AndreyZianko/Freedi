@@ -19,13 +19,13 @@
             <div class="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="@Url.Action("Freedi","Home")">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a>
+                        <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a>
+                        <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a>
                     </li>
                 </ul>
             </div>
@@ -65,31 +65,14 @@
         <div class="col-lg-5">
             <div class="product_details">
                 <div class="product_details_title">
-                    <h2>Pocket cotton sweatshirt</h2>
-                    <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                    <h2>@Model.Name</h2>
+                    <p>@Model.Description</p>
                 </div>
                 <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
                     <span class="ti-truck"></span><span>free delivery</span>
                 </div>
 
                 <div class="product_price">@Model.Price @Model.Currency</div>
-                <ul class="star_rating">
-                    <li>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                    </li>
-                </ul>
                 <div class="product_color">
                     <span>Select Color:</span>
                     <ul>
@@ -115,10 +98,8 @@
                         @Html.HiddenFor(x => x.Id);
                         @Html.Hidden("Quantity");
 
-                    @*<div id="cart_add" class="red_button add_to_cart_button">add to cart</div>*@
                         <input class="red_button add_to_cart_button" type="submit" value="add to cart"/>
                     }
-                    @*<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>*@
                 </div>
             </div>
         </div>
