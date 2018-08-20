@@ -9,15 +9,13 @@ namespace Freedi.DataProvider.Entites
     public class Order
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public decimal Sum { get; set; }
-        public virtual ICollection<CartLine> CartLines { get; set; } = new List<CartLine>();
         public DateTime Date { get; set; }
-        public string ClientName { get; set; }
-        public virtual ClientProfile ClientProfile { get; set; }
-        public int ClientProfileId { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
 
-
+        public virtual ICollection<CartLine> CartLines { get; set; } = new HashSet<CartLine>();
+        public virtual ApplicationUser ApplicationUser { get; set; } 
     }
 }

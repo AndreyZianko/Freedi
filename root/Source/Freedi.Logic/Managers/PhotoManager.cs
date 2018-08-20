@@ -60,7 +60,6 @@ namespace Freedi.Logic.Managers
 
                 return _photos;
             }
-            throw new Exception("");
         }
 
 
@@ -86,7 +85,7 @@ namespace Freedi.Logic.Managers
         public void DeletePhotoFromProjectByPhotoId(int photoId)
         {
             var pathbyid = _photosRepository.Get(photoId);
-            var fullpath = HostingEnvironment.MapPath(pathbyid.PhotoPath);
+            var fullpath = HostingEnvironment.MapPath(pathbyid.Path);
             var fileInf = new FileInfo(fullpath ?? throw new InvalidOperationException());
             if (fileInf.Exists)
             {

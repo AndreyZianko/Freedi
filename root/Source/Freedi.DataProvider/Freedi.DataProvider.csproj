@@ -74,25 +74,9 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Entites\Goods.cs" />
     <Compile Include="Entites\Order.cs" />
-    <Compile Include="Migrations\201807241619585_InitialCreate.cs" />
-    <Compile Include="Migrations\201807241619585_InitialCreate.Designer.cs">
-      <DependentUpon>201807241619585_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807241637221_AddSexClientProfile.cs" />
-    <Compile Include="Migrations\201807241637221_AddSexClientProfile.Designer.cs">
-      <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808051657291_Photos.cs" />
-    <Compile Include="Migrations\201808051657291_Photos.Designer.cs">
-      <DependentUpon>201808051657291_Photos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808152046204_fixmodel.cs" />
-    <Compile Include="Migrations\201808152046204_fixmodel.Designer.cs">
-      <DependentUpon>201808152046204_fixmodel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808200935477_CartLine.cs" />
-    <Compile Include="Migrations\201808200935477_CartLine.Designer.cs">
-      <DependentUpon>201808200935477_CartLine.cs</DependentUpon>
+    <Compile Include="Migrations\201808201340056_Redesign-DB.cs" />
+    <Compile Include="Migrations\201808201340056_Redesign-DB.Designer.cs">
+      <DependentUpon>201808201340056_Redesign-DB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,20 +92,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807241619585_InitialCreate.resx">
-      <DependentUpon>201807241619585_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807241637221_AddSexClientProfile.resx">
-      <DependentUpon>201807241637221_AddSexClientProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808051657291_Photos.resx">
-      <DependentUpon>201808051657291_Photos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808152046204_fixmodel.resx">
-      <DependentUpon>201808152046204_fixmodel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808200935477_CartLine.resx">
-      <DependentUpon>201808200935477_CartLine.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808201340056_Redesign-DB.resx">
+      <DependentUpon>201808201340056_Redesign-DB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

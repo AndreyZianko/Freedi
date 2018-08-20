@@ -7,13 +7,13 @@ namespace Freedi.DataProvider.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class fixmodel : IMigrationMetadata
+    public sealed partial class RedesignDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixmodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RedesignDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808152046204_fixmodel"; }
+            get { return "201808201340056_Redesign-DB"; }
         }
         
         string IMigrationMetadata.Source

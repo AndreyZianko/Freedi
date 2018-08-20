@@ -14,6 +14,6 @@ namespace Freedi.DataProvider.Entites
         public string Address { get; set; }
         public string Sex { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual ICollection<Order> Orders{ get; set;} = new List<Order>();
+        public virtual ICollection<Order> Orders{ get; set;} = new HashSet<Order>();
     }
 }

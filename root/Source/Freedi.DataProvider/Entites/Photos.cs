@@ -7,9 +7,10 @@ namespace Freedi.DataProvider.Entites
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PhotoId { get; set; }
-        public string PhotoPath { get; set; }
-        public virtual Goods Goods { get; set; }
+        public int Id { get; set; }
+        public string Path { get; set; }
         public int GoodsId { get; set; }
+
+        public virtual Goods Goods { get; set; }
     }
 }

@@ -28,79 +28,56 @@ namespace Freedi.Logic.Managers
 
         public List<GoodsViewModel> GetGoods()
         {
-            try
+            return GoodRepository.GetAll().Select(goods => new GoodsViewModel
             {
-                return GoodRepository.GetAll().Select(goods => new GoodsViewModel
+                Id = goods.Id,
+                Name = goods.Name,
+                Price = goods.Price,
+                Currency = goods.Currency,
+                Sex = goods.Sex,
+                StockQuantity = goods.StockQuantity,
+                Photo = goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.Id, PhotoPath = ph.Path })
+                    .ToList(),
+                PhotoCount = goods.Photos.Count(),
+                Description = goods.Description,
+                Type = goods.Type,
+                Stock = goods.Stock
+            }).ToList();
+        }
+
+        public GoodsViewModel GetGoodsById(int? id)
+        {
+            var goods = GoodRepository.Get(id) ?? null;
+            if (goods != null)
+                return new GoodsViewModel
                 {
                     Id = goods.Id,
                     Name = goods.Name,
                     Price = goods.Price,
                     Currency = goods.Currency,
                     Sex = goods.Sex,
-                    StockQuantity = goods.StockQuantity,
-                    Photo = goods.Photos.Select(ph => new PhotosViewModel {PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath})
+                    Photo = goods.Photos
+                        .Select(ph => new PhotosViewModel { PhotoId = ph.Id, PhotoPath = ph.Path })
                         .ToList(),
-                    PhotoCount = goods.Photos.Count(),
+                    PhotoCount = goods.Photos.Count,
+                    StockQuantity = goods.StockQuantity,
                     Description = goods.Description,
                     Type = goods.Type,
                     Stock = goods.Stock
-                }).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-
-            }
-        }
-
-        public GoodsViewModel GetGoodsById(int? id)
-        {
-            try
-            {
-                var goods = GoodRepository.Get(id) ?? null;
-                if (goods != null)
-                    return new GoodsViewModel
-                    {
-                        Id = goods.Id,
-                        Name = goods.Name,
-                        Price = goods.Price,
-                        Currency = goods.Currency,
-                        Sex = goods.Sex,
-                        Photo = goods.Photos.Select(ph => new PhotosViewModel { PhotoId = ph.PhotoId, PhotoPath = ph.PhotoPath })
-                            .ToList(),
-                        PhotoCount = goods.Photos.Count,
-                        StockQuantity = goods.StockQuantity,
-                        Description = goods.Description,
-                        Type = goods.Type,
-                        Stock = goods.Stock
-                    };
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-
-            }
+                };
 
             return null;
         }
 
         public void GoodsUpdate(GoodsViewModel goodsViewModel)
         {
-            try
-            {
 
-                var goods = GoodRepository.Get(goodsViewModel.Id);
-                if (goods != null)
-                {
-                    fillGoodModelForUpdate(goods, goodsViewModel);
-                    GoodRepository.Update(goods);
-                    Uow.Save();
-                }
-            }
-            catch (Exception ex)
+            var goods = GoodRepository.Get(goodsViewModel.Id);
+            if (goods != null)
             {
-                throw new Exception(ex.Message);
-
+                fillGoodModelForUpdate(goods, goodsViewModel);
+                GoodRepository.Update(goods);
+                Uow.Save();
             }
         }
 
@@ -108,71 +85,45 @@ namespace Freedi.Logic.Managers
         public void CreateProduct(GoodsViewModel goodsViewModel)
         {
 
-            try
+            if (goodsViewModel != null)
             {
-                if (goodsViewModel != null)
-                {
-                    var goods = new Goods();
-                    FillEntityFromViewModel(goods, goodsViewModel);
-                    GoodRepository.Create(goods);
-                    Uow.Save();
-                }
+                var goods = new Goods();
+                FillEntityFromViewModel(goods, goodsViewModel);
+                GoodRepository.Create(goods);
+                Uow.Save();
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
 
-            }
-          
         }
 
 
         public void DeleteProduct(int id)
         {
-            try
-            {
-          
-                DeletePhotoFromProjectByPath(id);
-                GoodRepository.Delete(id);
-                Uow.Save();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
 
-            }
-           
+            DeletePhotoFromProjectByPath(id);
+            GoodRepository.Delete(id);
+            Uow.Save();
         }
 
 
         public void DeletePhotoFromProjectByPath(int id)
         {
 
-            try
-            {
-                if (GoodRepository.Get(id) != null && GoodRepository.Get(id).Photos.Count > 0)
-                    foreach (var item in GoodRepository.Get(id).Photos.Select(x => x.PhotoPath).ToList())
+            if (GoodRepository.Get(id) != null && GoodRepository.Get(id).Photos.Count > 0)
+                foreach (var item in GoodRepository.Get(id).Photos.Select(x => x.Path).ToList())
+                {
+                    var fullpath = HostingEnvironment.MapPath(item);
+                    var fileInf = new FileInfo(fullpath ?? throw new InvalidOperationException());
+                    if (fileInf.Exists)
                     {
-                        var fullpath = HostingEnvironment.MapPath(item);
-                        var fileInf = new FileInfo(fullpath ?? throw new InvalidOperationException());
-                        if (fileInf.Exists)
-                        {
-                            fileInf.Delete();
-                            fileInf.Refresh();
-                            var folder =
-                                new DirectoryInfo(Path.GetDirectoryName(fullpath) ?? throw new InvalidOperationException());
-                            if (folder.Exists && !fileInf.Exists)
-                                Directory.Delete(Path.GetDirectoryName(fullpath) ?? throw new InvalidOperationException(),
-                                    true);
-                        }
+                        fileInf.Delete();
+                        fileInf.Refresh();
+                        var folder =
+                            new DirectoryInfo(Path.GetDirectoryName(fullpath) ?? throw new InvalidOperationException());
+                        if (folder.Exists && !fileInf.Exists)
+                            Directory.Delete(Path.GetDirectoryName(fullpath) ?? throw new InvalidOperationException(),
+                                true);
                     }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-
-            }
-
+                }
         }
 
         private void fillGoodModelForUpdate(Goods goods, GoodsViewModel goodsViewModel)
@@ -188,7 +139,7 @@ namespace Freedi.Logic.Managers
 
             foreach (var photo in goodsViewModel.Photo)
                 if (photo.PhotoPath != null)
-                    goods.Photos.Add(new Photos {PhotoPath = photo.PhotoPath});
+                    goods.Photos.Add(new Photos { Path = photo.PhotoPath });
         }
 
 
@@ -203,7 +154,7 @@ namespace Freedi.Logic.Managers
             goods.Description = goodsViewModel.Description;
             goods.Stock = goodsViewModel.Stock;
 
-            foreach (var photo in goodsViewModel.Photo) goods.Photos.Add(new Photos {PhotoPath = photo.PhotoPath});
+            foreach (var photo in goodsViewModel.Photo) goods.Photos.Add(new Photos { Path = photo.PhotoPath });
         }
     }
 }

@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Freedi.Logic.Interfaces;
 using Freedi.Logic.Managers;
 using Freedi.Model.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Freedi.Website.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
 
@@ -18,28 +20,21 @@ namespace Freedi.Website.Controllers
         {
             _orderManager = orderManager;
         }
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public OrderViewModel MakeOrder()
         {
-            OrderViewModel order=null;
-            if(HttpContext.Session["Cart"] != null)
+            OrderViewModel order = null;
+            if (HttpContext.Session["Cart"] != null)
             {
-               
-
-                   var cart = (CartManager)Session["Cart"];
-                    order = new OrderViewModel
-                    {
-                        CartModel = cart.CartFull(),
-                        Sum = cart.TotalValue(),
-                        ClientName = User.Identity.Name
-                    };
+                var cart = (CartManager)Session["Cart"];
+                order = new OrderViewModel
+                {
+                    CartModel = cart.CartFull(),
+                    Sum = cart.TotalValue(),
+                    ApplicationUserId = User.Identity.GetUserId()
+                };
                 _orderManager.MakeOrder(order);
-
-
+                cart.Clear();
             }
 
             return order;

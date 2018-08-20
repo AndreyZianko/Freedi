@@ -4,7 +4,7 @@ using Freedi.Model.ViewModels;
 
 namespace Freedi.Website.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IGoodsManager _goodsManager;

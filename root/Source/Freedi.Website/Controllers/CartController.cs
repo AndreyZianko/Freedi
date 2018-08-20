@@ -7,6 +7,7 @@ using Freedi.Logic.Managers;
 
 namespace Freedi.Website.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         public CartController(IGoodsManager goodsManager, IOrderManager orderManager)
@@ -65,7 +66,5 @@ namespace Freedi.Website.Controllers
 
             return cart;
         }
-
-      
     }
 }
