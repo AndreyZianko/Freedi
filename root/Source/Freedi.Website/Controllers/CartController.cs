@@ -18,10 +18,7 @@ namespace Freedi.Website.Controllers
 
         private IGoodsManager GoodsManager { get; }
         private IOrderManager OrderManager { get; }
-        public ActionResult Index()
-        {
-            return View();
-        }
+       
 
         [HttpPost]
         public ActionResult AddToCart(int? id, string quantity)

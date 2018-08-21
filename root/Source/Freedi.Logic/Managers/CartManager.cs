@@ -43,6 +43,8 @@ namespace Freedi.Logic.Managers
         public void Clear()
         {
             _cart.Lines.Clear();
+            _cart.TotalGoods = 0;
+            _cart.TotalGoods = 0;
         }
 
         public CartViewModel CartFull()

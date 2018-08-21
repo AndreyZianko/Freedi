@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Freedi.Logic.Interfaces;
 using Freedi.Model.ViewModels;
 using Freedi.Website.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace Freedi.Website.Controllers
@@ -12,26 +13,24 @@ namespace Freedi.Website.Controllers
     public class AccountController : Controller
     {
         private readonly IUserManager _um;
-
-        public AccountController(IUserManager um)
+        private readonly IOrderManager _orderManager;
+        private readonly IClientProfileManager _clientProfileManager;
+        public AccountController(IUserManager um,IOrderManager orderManager, IClientProfileManager clientProfileManager)
         {
             _um = um;
+            _orderManager = orderManager;
+            _clientProfileManager = clientProfileManager;
         }
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        [AllowAnonymous]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+     
         [AllowAnonymous]
         public ActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
-            return View("Login");
+                return RedirectToAction("Freedi", "Home");
+            return View();
         }
 
         [HttpPost]
@@ -56,7 +55,7 @@ namespace Freedi.Website.Controllers
                         IsPersistent = true
                     }, claim);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Freedi", "Home");
                 }
             }
 
@@ -66,7 +65,7 @@ namespace Freedi.Website.Controllers
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Freedi", "Home");
         }
 
 
@@ -74,6 +73,14 @@ namespace Freedi.Website.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        [Authorize]
+        public ActionResult UserProfile()
+        {
+            
+           
+            return View(_clientProfileManager.GetProfile(User.Identity.GetUserId()));
         }
 
         [HttpPost]
@@ -94,7 +101,7 @@ namespace Freedi.Website.Controllers
                 };
                 var operationDetails = await _um.Create(userDto);
                 if (operationDetails.Succedeed)
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Freedi", "Home");
                 ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
 

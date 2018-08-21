@@ -9,11 +9,9 @@ namespace Freedi.Website.Controllers
     {
         private readonly IGoodsManager _goodsManager;
         private readonly IPhotoManager _photoManager;
-        private IOrderManager _orderManager;
 
-        public AdminController(IOrderManager orderManager, IGoodsManager goodsManager, IPhotoManager photoManager)
+        public AdminController( IGoodsManager goodsManager, IPhotoManager photoManager)
         {
-            _orderManager = orderManager;
             _goodsManager = goodsManager;
             _photoManager = photoManager;
         }
@@ -42,10 +40,11 @@ namespace Freedi.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(GoodsViewModel _goodsViewModel)
         {
-            if (!ModelState.IsValid) return PartialView("CreateProductPartialVIew", _goodsViewModel);
+            if (!ModelState.IsValid)
+                return PartialView("CreateProductPartialVIew", _goodsViewModel);
             _goodsViewModel.Photo = _photoManager.UploadPhoto(_goodsViewModel.UploadedFile, _goodsViewModel.Name);
             _goodsManager.CreateProduct(_goodsViewModel);
-            return PartialView("CreateProductPartialVIew");
+            return RedirectToAction("Admin");
         }
 
 
@@ -58,7 +57,7 @@ namespace Freedi.Website.Controllers
 
             _photoManager.UpdatePhoto(goods);
             _goodsManager.GoodsUpdate(goods);
-            return PartialView("EditProductView", _goodsManager.GetGoodsById(goods.Id));
+           return RedirectToAction("Admin");
         }
 
         public ActionResult DeleteProduct(int? Id)

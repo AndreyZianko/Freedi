@@ -1,4 +1,5 @@
-﻿using Freedi.DataProvider.Entites;
+﻿using System.Linq;
+using Freedi.DataProvider.Entites;
 using Freedi.DataProvider.Identity;
 using Freedi.DataProvider.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -18,6 +19,11 @@ namespace Freedi.DataProvider.Repositories
         {
             _context.ClientProfiles.Add(item);
             _context.SaveChanges();
+        }
+
+        public ClientProfile GetClientProfile(string userid)
+        {
+            return _context.ClientProfiles.FirstOrDefault(x => x.Id == userid);
         }
 
         public ApplicationUserManager UserManager()

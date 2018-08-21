@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -245,6 +246,7 @@
     <Content Include="Content\Cart\Images\1.png" />
     <Content Include="Content\Cart\Images\2.png" />
     <Content Include="Content\Errors\Error404.css" />
+    <Content Include="Content\Errors\Error500.css" />
     <Content Include="Content\img\bootstrap-imageupload.css" />
     <Content Include="Content\img\loading-white-d.gif" />
     <Content Include="Content\TemplateImages\banner_1.jpg" />
@@ -310,12 +312,14 @@
     <Content Include="Content\AdminPanel\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.min.map" />
     <Content Include="Content\AdminPanel\vendor\jquery\jquery.slim.min.map" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\Freedi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -373,11 +377,12 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Cart\GetCartView.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Order\GetOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\PhotoProduct\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -385,8 +390,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Freedi.Common\Freedi.Common.csproj">

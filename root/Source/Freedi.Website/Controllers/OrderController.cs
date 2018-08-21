@@ -21,23 +21,29 @@ namespace Freedi.Website.Controllers
             _orderManager = orderManager;
         }
 
-        public OrderViewModel MakeOrder()
+        public ActionResult MakeOrder()
         {
-            OrderViewModel order = null;
+          
             if (HttpContext.Session["Cart"] != null)
             {
                 var cart = (CartManager)Session["Cart"];
-                order = new OrderViewModel
+                OrderViewModel order = new OrderViewModel
                 {
-                    CartModel = cart.CartFull(),
+                    CartLineView = cart.Lines,
                     Sum = cart.TotalValue(),
                     ApplicationUserId = User.Identity.GetUserId()
                 };
                 _orderManager.MakeOrder(order);
                 cart.Clear();
-            }
 
-            return order;
+            }
+            return RedirectToAction("Freedi", "Home", new { area = "" });
+
+        }
+
+        public ActionResult GetOrders()
+        {
+            return PartialView("GetOrders", _orderManager.GetOrdersByUserID(User.Identity.GetUserId()));
         }
     }
 }

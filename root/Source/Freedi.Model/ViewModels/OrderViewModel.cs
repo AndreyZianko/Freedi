@@ -1,4 +1,5 @@
 ﻿using Freedi.Model.ViewModels.CartModels;
+using System.Collections.Generic;
 
 namespace Freedi.Model.ViewModels
 {
@@ -6,7 +7,8 @@ namespace Freedi.Model.ViewModels
     {
         public int Id { get; set; }
         public decimal Sum { get; set; }
-        public CartViewModel CartModel {get; set; }
+        public IEnumerable<CartLineView> CartLineView { get; set; }
         public string ApplicationUserId { get; set; }
+        public List<GoodsViewModel> Goods { get; set; }
     }
 }

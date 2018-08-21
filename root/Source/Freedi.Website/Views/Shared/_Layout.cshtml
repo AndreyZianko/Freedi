@@ -89,9 +89,19 @@
                                 </a>
                             </li>
                             <li>
+                                @if (!Request.IsAuthenticated)
+                                { 
                                 <a href="@Url.Action("Login", "Account")">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("UserProfile", "Account")">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
+                                }
+
                             </li>
                             @if (Request.IsAuthenticated)
                             {
@@ -238,7 +248,6 @@
 <script>
     $(window).on('load',
         function() {
-            debugger;
             $.ajax({
                 url: "/Cart/CartItemsCounter",
                 success: function(result) {

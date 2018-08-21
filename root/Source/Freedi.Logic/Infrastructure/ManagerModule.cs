@@ -10,6 +10,7 @@ namespace Freedi.Logic.Infrastructure
         {
             builder.RegisterType<UserManager>().As<IUserManager>().InstancePerRequest();
             builder.RegisterType<PhotoManager>().As<IPhotoManager>().InstancePerRequest();
+            builder.RegisterType<ClientProfileManager>().As<IClientProfileManager>().InstancePerRequest();
         }
     }
 }

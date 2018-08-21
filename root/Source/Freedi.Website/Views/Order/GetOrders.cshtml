@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Freedi.Model.ViewModels.OrderViewModel>
+
+<table class="table">
+    
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Price
+        </th>
+
+        <th>
+            Currency
+        </th>
+        <th>
+            Photo
+        </th>
+    </tr>
+    @foreach (var item in Model) {
+    <tr>
+      
+        
+        @foreach (var p in item.Goods)
+        {
+            <td>
+                @p.Name
+            </td>
+            <td>
+                @p.Price
+            </td>
+            <td>
+                @p.Currency
+            </td>
+            <td>
+                <img src="@Url.Content(p.Photo.Select(x => x.PhotoPath).FirstOrDefault() ?? "~/PathToDefaultImage")"/>
+            </td>
+            <td>
+
+            </td>
+        }
+      
+
+    </tr>
+}
+  
+
+</table>
