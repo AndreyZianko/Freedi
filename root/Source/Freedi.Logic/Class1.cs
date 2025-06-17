@@ -8,5 +8,9 @@ namespace Freedi.Logic
 {
     public class Class1
     {
+        public string Ping()
+        {
+            return "Pong";
+        }
     }
 }
