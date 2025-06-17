@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{77B69B91-83F6-4D65-AAF7-000000000001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Freedi.Tests</RootNamespace>
+    <AssemblyName>Freedi.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HomeControllerTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Freedi.Website\Freedi.Website.csproj">
+      <Project>{5493F5EE-38C5-45DC-8397-095DBA8FED5B}</Project>
+      <Name>Freedi.Website</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Freedi.Logic\Freedi.Logic.csproj">
+      <Project>{D3877976-8326-4665-BA5D-5035DFFDD543}</Project>
+      <Name>Freedi.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Freedi.Common\Freedi.Common.csproj">
+      <Project>{BB060EC9-DA6F-4FD6-A42A-9DD9A922EAF2}</Project>
+      <Name>Freedi.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Freedi.DataProvider\Freedi.DataProvider.csproj">
+      <Project>{40C2E583-29F0-44BD-BF23-AE5D9295E797}</Project>
+      <Name>Freedi.DataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Freedi.Model\Freedi.Model.csproj">
+      <Project>{4F3A4B70-C94B-472F-9863-4DE9C94EE344}</Project>
+      <Name>Freedi.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

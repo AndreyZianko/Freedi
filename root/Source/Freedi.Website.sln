@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freedi.DataProvider", "Free
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freedi.Model", "Freedi.Model\Freedi.Model.csproj", "{4F3A4B70-C94B-472F-9863-4DE9C94EE344}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freedi.Tests", "Freedi.Tests\Freedi.Tests.csproj", "{77B69B91-83F6-4D65-AAF7-000000000001}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,8 +40,12 @@ Global
 		{4F3A4B70-C94B-472F-9863-4DE9C94EE344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F3A4B70-C94B-472F-9863-4DE9C94EE344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F3A4B70-C94B-472F-9863-4DE9C94EE344}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F3A4B70-C94B-472F-9863-4DE9C94EE344}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+                {4F3A4B70-C94B-472F-9863-4DE9C94EE344}.Release|Any CPU.Build.0 = Release|Any CPU
+                {77B69B91-83F6-4D65-AAF7-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+                {77B69B91-83F6-4D65-AAF7-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+                {77B69B91-83F6-4D65-AAF7-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+                {77B69B91-83F6-4D65-AAF7-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+        EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
